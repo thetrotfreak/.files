@@ -27,7 +27,7 @@
           "style": "plain",
           "background": "p:t-background",
           "foreground": "p:terminal-blue",
-            "template": "{{ .UserName }}@{{ .HostName }}"
+          "template": "{{ .UserName }}@{{ .HostName }}"
         },
         {
           "type": "text",
@@ -49,7 +49,7 @@
           "type": "git",
           "style": "plain",
           "foreground": "p:light-sky-blue",
-          "template": "{{ .HEAD }}",
+          "template": "<i>{{ .HEAD }}</i>",
           "properties": {
             "fetch_status": false,
             "branch_icon": "\u26a1"
