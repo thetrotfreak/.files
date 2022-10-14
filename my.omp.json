@@ -1,0 +1,78 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "palette": {
+    "main-bg": "#24283b",
+    "terminal-red": "#f7768e",
+    "pistachio-green": "#9ece6a",
+    "terminal-green": "#73daca",
+    "terminal-yellow": "#e0af68",
+    "terminal-blue": "#7aa2f7",
+    "celeste-blue": "#b4f9f8",
+    "light-sky-blue": "#7dcfff",
+    "terminal-white": "#c0caf5",
+    "white-blue": "#a9b1d6",
+    "blue-bell": "#9aa5ce",
+    "pastal-grey": "#cfc9c2",
+    "terminal-magenta": "#bb9af7",
+    "blue-black": "#565f89",
+    "terminal-black": "#414868",
+    "t-background": "p:main-bg"
+  },
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "session",
+          "style": "plain",
+          "background": "p:t-background",
+          "foreground": "p:terminal-blue",
+            "template": "{{ .UserName }}@{{ .HostName }}"
+        },
+        {
+          "type": "text",
+          "style": "plain",
+          "background": "transparent",
+          "foreground": "p:terminal-blue",
+          "template": " \u279c "
+        },
+        {
+          "type": "path",
+          "style": "plain",
+          "foreground": "p:terminal-magenta",
+          "properties": {
+            "style": "folder"
+          },
+          "template": "<b>{{ .Path }}</b> "
+        },
+        {
+          "type": "git",
+          "style": "plain",
+          "foreground": "p:light-sky-blue",
+          "template": "{{ .HEAD }}",
+          "properties": {
+            "fetch_status": false,
+            "branch_icon": "\u26a1"
+          }
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "foreground": "p:pistachio-green",
+          "style": "plain",
+          "template": "\u25b6",
+          "type": "text"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "final_space": true,
+  "version": 2,
+  "terminal_background": "p:t-background"
+}
