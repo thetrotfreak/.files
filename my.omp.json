@@ -48,8 +48,9 @@
         {
           "type": "git",
           "style": "plain",
-          "foreground": "p:light-sky-blue",
-          "template": "<i>{{ .HEAD }}</i>",
+          "background": "p:t-background",
+          "foreground": "p:terminal-white",
+          "template": "{{ .HEAD }}",
           "properties": {
             "fetch_status": false,
             "branch_icon": "\u26a1"
