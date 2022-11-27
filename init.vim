@@ -23,3 +23,16 @@ let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
 set shellquote=
 set shellxquote=
 
+" use vim-plug as plugin manager
+" use a custom colorscheme
+call plug#begin()
+
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+
+call plug#end()
+
+colorscheme tokyonight-night
+
+" for transparent background
+highlight Normal guibg=none
+highlight NonText guibg=none
