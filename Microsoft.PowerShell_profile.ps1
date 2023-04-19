@@ -1,3 +1,16 @@
+function Get-FinalPathComponent {
+    if ($PWD.Path.Equals($env:USERPROFILE)) { return "~" }
+    elseif ($PWD.Path.Equals($PWD.Drive.Root)) { return $PWD.Path }
+    else { return $PWD.Path.Substring($PWD.Path.LastIndexOf("\") + 1) }
+}
+function prompt() {
+    Write-Host -ForegroundColor Green $env:USERNAME@$env:COMPUTERNAME -NoNewline
+    Write-Host -ForegroundColor White : -NoNewline
+    Write-Host -ForegroundColor Blue $(Get-FinalPathComponent) -NoNewline
+    Write-Host -ForegroundColor White "$" -NoNewline
+    return " "
+}
+
 oh-my-posh init pwsh --config 'https://raw.githubusercontent.com/thetrotfreak/.dotfiles/main/my.omp.json' | Invoke-Expression
 
 Set-Alias -Name 'vi' -Value 'nvim.exe'
