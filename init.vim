@@ -3,8 +3,6 @@
 syntax on
 
 set number relativenumber
-set cursorline
-set cursorlineopt=number
 
 set tabstop=4
 set softtabstop=4
@@ -23,16 +21,65 @@ let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
 set shellquote=
 set shellxquote=
 
-" use vim-plug as plugin manager
-" use a custom colorscheme
-call plug#begin()
-
-Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
-
-call plug#end()
-
-colorscheme tokyonight-night
-
 " for transparent background
 highlight Normal guibg=none
 highlight NonText guibg=none
+
+colorscheme slate
+
+set termguicolors
+
+let g:loaded_python3_provider=0
+let g:loaded_perl_provider=0
+
+" courtesy to: youtube.com/watch?v=XA2WjJbmmoM
+" tells VIm to not behave like Vi
+set nocompatible
+
+" enable syntax and plugins (for netrw)
+syntax enable
+filetype plugin on
+
+" search down into the subfolders
+" provides tab-compeltion for file operations
+set path+=**
+
+" display all matching files when we tab-complete
+set wildmenu
+
+" display relative line number, cursor line is relative
+set number
+set relativenumber
+
+" netrw tweaks
+let g:netrw_banner=0
+let g:netrw_browse_split=4
+let g:netrw_altv=1
+let g:netrw_liststyle=3
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\*'
+
+" Vim hard mode, basically, just disable arrow keys, so that your fingers
+" never leave the home row on the keyboard
+set backspace=0
+
+nnoremap <buffer> <Left> <Esc>
+nnoremap <buffer> <Right> <Esc>
+nnoremap <buffer> <Up> <Esc>
+nnoremap <buffer> <Down> <Esc>
+nnoremap <buffer> <PageUp> <Esc>
+nnoremap <buffer> <PageDown> <Esc>
+
+inoremap <buffer> <Left> <Esc>
+inoremap <buffer> <Right> <Esc>
+inoremap <buffer> <Up> <Esc>
+inoremap <buffer> <Down> <Esc>
+inoremap <buffer> <PageUp> <Esc>
+inoremap <buffer> <PageDown> <Esc>
+
+vnoremap <buffer> <Left> <Esc>
+vnoremap <buffer> <Right> <Esc>
+vnoremap <buffer> <Up> <Esc>
+vnoremap <buffer> <Down> <Esc>
+vnoremap <buffer> <PageUp> <Esc>
+vnoremap <buffer> <PageDown> <Esc>
