@@ -1,11 +1,18 @@
-colorscheme catppuccin_frappe
 " courtesy to: youtube.com/watch?v=XA2WjJbmmoM
-" tells VIm to not behave like Vi
+" tells Vim to not behave like Vi
 set nocompatible
+
+set termguicolors
+colorscheme catppuccin_mocha
+
+set hidden
+set noswapfile
+set backspace=indent,eol,start
+set shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent smartindent
 
 " enable syntax and plugins (for netrw)
 syntax enable
-filetype plugin on
+filetype plugin indent on
 
 " search down into the subfolders
 " provides tab-compeltion for file operations
@@ -28,7 +35,7 @@ let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\*'
 
 " Vim hard mode, basically, just disable arrow keys, so that your fingers
 " never leave the home row on the keyboard
-set backspace=0
+" set backspace=0
 
 nnoremap <buffer> <Left> <Esc>
 nnoremap <buffer> <Right> <Esc>
@@ -50,3 +57,8 @@ vnoremap <buffer> <Up> <Esc>
 vnoremap <buffer> <Down> <Esc>
 vnoremap <buffer> <PageUp> <Esc>
 vnoremap <buffer> <PageDown> <Esc>
+
+inoremap <leader><leader> <Esc>
+vnoremap <leader><leader> <Esc>
+nnoremap <leader>py :-1read $HOME/.vim/snippets/.skeleton.py<CR>
+nnoremap <leader>c :-1read $HOME/.vim/snippets/.skeleton.c<CR>
