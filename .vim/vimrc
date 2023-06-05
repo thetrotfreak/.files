@@ -4,6 +4,9 @@ set nocompatible
 
 set termguicolors
 colorscheme catppuccin_mocha
+" To explicitly use dark variant of gruvbox, uncomment the next 2 lines
+" set background=dark
+" colorscheme gruvbox
 
 set hidden
 set noswapfile
