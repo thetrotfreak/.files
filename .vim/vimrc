@@ -27,6 +27,7 @@ set wildmenu
 " display relative line number, cursor line is relative
 set number
 set relativenumber
+set cursorline
 
 " netrw tweaks
 let g:netrw_banner=0
@@ -65,3 +66,14 @@ inoremap <leader><leader> <Esc>
 vnoremap <leader><leader> <Esc>
 nnoremap <leader>py :-1read $HOME/.vim/snippets/.skeleton.py<CR>
 nnoremap <leader>c :-1read $HOME/.vim/snippets/.skeleton.c<CR>
+
+" use a plugin manager, vim-plug
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin()
+Plug 'psf/black', { 'branch': 'stable' }
+call plug#end()
