@@ -1,9 +1,8 @@
-" courtesy to: youtube.com/watch?v=XA2WjJbmmoM
+" Watch: youtube.com/watch?v=XA2WjJbmmoM
 " tells Vim to not behave like Vi
 set nocompatible
 
 set termguicolors
-colorscheme catppuccin_mocha
 " To explicitly use dark variant of gruvbox, uncomment the next 2 lines
 " set background=dark
 " colorscheme gruvbox
@@ -24,7 +23,6 @@ set path+=**
 " display all matching files when we tab-complete
 set wildmenu
 
-" display relative line number, cursor line is relative
 set number
 set relativenumber
 set cursorline
@@ -37,8 +35,7 @@ let g:netrw_liststyle=3
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\*'
 
-" Vim hard mode, basically, just disable arrow keys, so that your fingers
-" never leave the home row on the keyboard
+" Vim hard mode; disable arrow keys and backspace key; makes your life harder
 " set backspace=0
 
 nnoremap <buffer> <Left> <Esc>
@@ -64,16 +61,19 @@ vnoremap <buffer> <PageDown> <Esc>
 
 inoremap <leader><leader> <Esc>
 vnoremap <leader><leader> <Esc>
-nnoremap <leader>py :-1read $HOME/.vim/snippets/.skeleton.py<CR>
-nnoremap <leader>c :-1read $HOME/.vim/snippets/.skeleton.c<CR>
 
-" use a plugin manager, vim-plug
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+" nnoremap <leader>py :-1read $HOME/.vim/snippets/.skeleton.py<CR>
+" nnoremap <leader>c :-1read $HOME/.vim/snippets/.skeleton.c<CR>
 
-call plug#begin()
-Plug 'psf/black', { 'branch': 'stable' }
-call plug#end()
+" Read: https://www.amd.com/content/dam/amd/en/documents/txt/aocc-4.0.0-readme.txt
+" You can find more about these global variables in clan-format.py
+let g:clang_format_path="/opt/AMD/aocc-compiler-4.0.0/bin/clang-format"
+let g:clang_format_fallback_style="LLVM"
+
+" Read: https://black.readthedocs.io/en/stable/integrations/editors.html#vim-8-native-plugin-management
+" Read: https://clang.llvm.org/docs/ClangFormat.html#vim-integration
+augroup format
+    autocmd!
+    autocmd BufWritePre *.py execute ":Black"
+    autocmd BufWritePre *.c,*.cc,*.cpp,*.h,*.java,*.js,*.json execute ":py3file /opt/AMD/aocc-compiler-4.0.0/share/clang/clang-format.py"
+augroup END
