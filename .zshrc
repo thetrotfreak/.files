@@ -8,6 +8,7 @@ export BROWSER=MicrosoftEdge.exe
 
 # Source AOCC (AMD Optimizing C/C++ and Fortran Compiler)
 # Read: https://www.amd.com/content/dam/amd/en/documents/txt/aocc-4.0.0-readme.txt
+# Read 3.1.1: https://www.amd.com/content/dam/amd/en/documents/pdfs/developer/aocc/aocc-v4.0-ga-user-guide.pdf
 # source /opt/AMD/aocc-compiler-4.0.0/setenv_AOCC.sh
 
 # For pip
