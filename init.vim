@@ -1,17 +1,15 @@
+" This init.vim for NeoVim on Windows
 " let $NO_COLOR='1'
 
+set termguicolors
 syntax on
-
 set number relativenumber
-
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
 set autoindent
-
 set noswapfile
-
 set ttyfast
 
 let &shell = executable('pwsh') ? 'pwsh' : 'powershell'
@@ -21,19 +19,14 @@ let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
 set shellquote=
 set shellxquote=
 
-" for transparent background
-highlight Normal guibg=none
-highlight NonText guibg=none
-
-colorscheme slate
-
-set termguicolors
+" Uncomment for transparent background
+" highlight Normal guibg=none
+" highlight NonText guibg=none
 
 let g:loaded_python3_provider=0
 let g:loaded_perl_provider=0
 
-" courtesy to: youtube.com/watch?v=XA2WjJbmmoM
-" tells VIm to not behave like Vi
+" Watch: youtube.com/watch?v=XA2WjJbmmoM
 set nocompatible
 
 " enable syntax and plugins (for netrw)
@@ -59,9 +52,9 @@ let g:netrw_liststyle=3
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\*'
 
-" Vim hard mode, basically, just disable arrow keys, so that your fingers
+" Vim hard mode; disable arrow keys, so that your fingers
 " never leave the home row on the keyboard
-set backspace=0
+" set backspace=0
 
 nnoremap <buffer> <Left> <Esc>
 nnoremap <buffer> <Right> <Esc>
