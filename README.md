@@ -1,10 +1,10 @@
 # .files
 Import links:
-|What?|Where?|
-|---|---|
+|What?|Where?|Note!|
+|---|---|---|
 |Oh My Zsh!|https://github.com/ohmyzsh/ohmyzsh/wiki#welcome-to-oh-my-zsh|
-|pip - The Python Package Installer|https://pip.pypa.io/en/stable/installation/#get-pip-py|
-|AMD Optimizing C/C++ and Fortran Compilers (AOCC)|https://www.amd.com/en/developer/aocc.html|
-|Black - The Uncompromising Code Formatter|https://black.readthedocs.io/en/stable/integrations/editors.html#vim-8-native-plugin-management|
+|**pip** - The Python Package Installer|https://pip.pypa.io/en/stable/installation/#get-pip-py|
+|**AOCC** - AMD Optimizing C/C++ and Fortran Compilers|https://www.amd.com/en/developer/aocc.html|`curl` [*this*](https://download.amd.com/developer/eula/aocc-compiler/aocc-compiler-4.0.0_1_amd64.deb) directly to avoid the **EULA**|
+|**Black** - The Uncompromising Code Formatter|https://black.readthedocs.io/en/stable/integrations/editors.html#vim-8-native-plugin-management|
 |ClangFormat|https://clang.llvm.org/docs/ClangFormat.html#vim-integration|
-|Vim Meetups|https://www.youtube.com/watch?v=XA2WjJbmmoM|
+|Vim Meetups|https://youtu.be/XA2WjJbmmoM?t=315|
