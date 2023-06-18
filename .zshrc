@@ -4,7 +4,9 @@ zstyle :omz:plugins:ssh-agent quiet yes
 zstyle :omz:plugins:ssh-agent lifetime
 
 # To use browser from WSL2 CLI
-export BROWSER=MicrosoftEdge.exe
+# export BROWSER=MicrosoftEdge.exe
+# export PATH=/mnt/c/Program\ Files/Google/Chrome/Application:$PATH
+# export BROWSER=chrome.exe
 
 # Source AOCC (AMD Optimizing C/C++ and Fortran Compiler)
 # Read: https://www.amd.com/content/dam/amd/en/documents/txt/aocc-4.0.0-readme.txt
