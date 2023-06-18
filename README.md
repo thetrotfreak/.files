@@ -1,6 +1,9 @@
 # WSL2 Ubuntu 22.04.2 LTS (Jammy Jellyfish)
-
-Import links:
+### Quick Setup:
+```console
+$ curl https://raw.githubusercontent.com/thetrotfreak/.files/main/wsl2.sh | dash
+```
+### References:
 |What?|Where?|Note!|
 |---|---|---|
 |Oh My Zsh!|https://github.com/ohmyzsh/ohmyzsh/wiki#welcome-to-oh-my-zsh|
