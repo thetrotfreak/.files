@@ -10,3 +10,6 @@ Import links:
 |ClangFormat|https://clang.llvm.org/docs/ClangFormat.html#vim-integration|
 |Vim Meetups|https://youtu.be/XA2WjJbmmoM?t=315|
 |MySQL|https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04#step-2-configuring-mysql|
+|**JDK** - Eclipse Temurin|https://adoptium.net/installation/linux/#_deb_installation_on_debian_or_ubuntu|
+|Docker|https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository|
+|**Volta** - The Hassle-Free JavaScript Tool Manager|https://docs.volta.sh/guide/getting-started|
