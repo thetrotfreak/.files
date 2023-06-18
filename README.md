@@ -8,3 +8,4 @@ Import links:
 |**Black** - The Uncompromising Code Formatter|https://black.readthedocs.io/en/stable/integrations/editors.html#vim-8-native-plugin-management|
 |ClangFormat|https://clang.llvm.org/docs/ClangFormat.html#vim-integration|
 |Vim Meetups|https://youtu.be/XA2WjJbmmoM?t=315|
+|MySQL|https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04#step-2-configuring-mysql|
