@@ -2,6 +2,7 @@
 set nocompatible
 set ttyfast
 set termguicolors
+" Read: https://vim.fandom.com/wiki/Avoid_the_escape_key#Use_Alt/Meta_In_a_Terminal
 " Read: https://vimhelp.org/term.txt.html#terminal-options
 " Read(slow &t_EI): https://stackoverflow.com/a/58042714
 " Note: This should be set after `set termguicolors` or `set t_Co=256`.
