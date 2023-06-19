@@ -1,8 +1,18 @@
 " Watch: youtube.com/watch?v=XA2WjJbmmoM
-" tells Vim to not behave like Vi
 set nocompatible
-
+set ttyfast
 set termguicolors
+" Read: https://vimhelp.org/term.txt.html#terminal-options
+" Read(slow &t_EI): https://stackoverflow.com/a/58042714
+" Note: This should be set after `set termguicolors` or `set t_Co=256`.
+if &term =~ 'xterm' || &term == 'win32'
+" Use DECSCUSR escape sequences
+    let &t_SI = "\e[5 q"      " blink bar
+    let &t_SR = "\e[3 q"      " blink underline
+    let &t_EI = "\e[1 q"      " blink block
+    let &t_ti ..= "\e[1 q"    " blink block
+    let &t_te ..= "\e[0 q"    " default (depends on terminal, normally blink block)
+endif
 " To explicitly use dark variant of gruvbox, uncomment the next 2 lines
 " set background=dark
 " colorscheme gruvbox
@@ -59,8 +69,8 @@ vnoremap <buffer> <Down> <Esc>
 vnoremap <buffer> <PageUp> <Esc>
 vnoremap <buffer> <PageDown> <Esc>
 
-inoremap <leader><leader> <Esc>
-vnoremap <leader><leader> <Esc>
+" inoremap <leader><leader> <Esc>
+" vnoremap <leader><leader> <Esc>
 
 " nnoremap <leader>py :-1read $HOME/.vim/snippets/.skeleton.py<CR>
 " nnoremap <leader>c :-1read $HOME/.vim/snippets/.skeleton.c<CR>
