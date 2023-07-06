@@ -21,5 +21,5 @@ wsl.exe --shell-type login --cd ~ --distribution Ubuntu tmux
 |**JDK** - Eclipse Temurin|https://adoptium.net/installation/linux/#_deb_installation_on_debian_or_ubuntu|
 |Docker|https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository|
 |**Volta** - The Hassle-Free JavaScript Tool Manager|https://docs.volta.sh/guide/getting-started|
-|GitHub CLI|https://github.com/cli/cli/blob/trunk/docs/install_linux.md#debian-ubuntu-linux-raspberry-pi-os-apt|
-|GitLab CLI|https://gitlab.com/gitlab-org/cli/-/releases|
+|GitHub CLI|https://github.com/cli/cli/blob/trunk/docs/install_linux.md#debian-ubuntu-linux-raspberry-pi-os-apt|Read [this](https://cli.github.com/manual/gh_completion)
+|GitLab CLI|https://gitlab.com/gitlab-org/cli/-/releases|Read [this](https://github.com/thetrotfreak/.files/blob/main/glab.md)
