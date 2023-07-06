@@ -1,7 +1,12 @@
 # WSL2 Ubuntu 22.04.2 LTS (Jammy Jellyfish)
 ### Quick Setup:
 ```console
-$ curl https://raw.githubusercontent.com/thetrotfreak/.files/main/wsl2.sh | dash
+curl https://raw.githubusercontent.com/thetrotfreak/.files/main/wsl2.sh | dash
+```
+### Windows Terminal Profile:
+
+```console
+wsl.exe --shell-type login --cd ~ --distribution Ubuntu tmux
 ```
 ### References:
 |What?|Where?|Note!|
