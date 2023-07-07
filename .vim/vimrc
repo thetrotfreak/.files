@@ -15,8 +15,8 @@ if &term =~ 'xterm' || &term == 'win32'
     let &t_te ..= "\e[0 q"    " default (depends on terminal, normally blink block)
 endif
 " To explicitly use dark variant of gruvbox, uncomment the next 2 lines
-" set background=dark
-" colorscheme gruvbox
+set background=dark
+colorscheme gruvbox
 
 set hidden
 set noswapfile
