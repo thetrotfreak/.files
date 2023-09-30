@@ -107,3 +107,6 @@ endif
 "   autocmd!
 "   autocmd VimEnter * :Vexplore
 " augroup END
+
+" Refer: https://vi.stackexchange.com/questions/14519/how-to-run-internal-vim-terminal-at-current-files-dir
+autocmd BufEnter * silent! lcd %:p:h
