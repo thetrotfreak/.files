@@ -18,7 +18,7 @@ if &term =~ 'xterm' || &term == 'win32'
 endif
 " To explicitly use dark variant of gruvbox, uncomment the next 2 lines
 set background=dark
-colorscheme gruvbox
+colorscheme nord
 
 set hidden
 set noswapfile
@@ -43,34 +43,38 @@ set cursorline
 " netrw tweaks
 let g:netrw_banner=0
 let g:netrw_browse_split=4
+" let g:netrw_browse_split=4
 let g:netrw_altv=1
 let g:netrw_liststyle=3
+" let g:netrw_winsize=25
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\*'
+" Refer: https://stackoverflow.com/questions/8730702/how-do-i-configure-vimrc-so-that-line-numbers-display-in-netrw-in-vim
+let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 
 " Vim hard mode; disable arrow keys and backspace key; makes your life harder
 " set backspace=0
 
-nnoremap <buffer> <Left> <Esc>
-nnoremap <buffer> <Right> <Esc>
-nnoremap <buffer> <Up> <Esc>
-nnoremap <buffer> <Down> <Esc>
-nnoremap <buffer> <PageUp> <Esc>
-nnoremap <buffer> <PageDown> <Esc>
-
-inoremap <buffer> <Left> <Esc>
-inoremap <buffer> <Right> <Esc>
-inoremap <buffer> <Up> <Esc>
-inoremap <buffer> <Down> <Esc>
-inoremap <buffer> <PageUp> <Esc>
-inoremap <buffer> <PageDown> <Esc>
-
-vnoremap <buffer> <Left> <Esc>
-vnoremap <buffer> <Right> <Esc>
-vnoremap <buffer> <Up> <Esc>
-vnoremap <buffer> <Down> <Esc>
-vnoremap <buffer> <PageUp> <Esc>
-vnoremap <buffer> <PageDown> <Esc>
+" nnoremap <buffer> <Left> <Esc>
+" nnoremap <buffer> <Right> <Esc>
+" nnoremap <buffer> <Up> <Esc>
+" nnoremap <buffer> <Down> <Esc>
+" nnoremap <buffer> <PageUp> <Esc>
+" nnoremap <buffer> <PageDown> <Esc>
+" 
+" inoremap <buffer> <Left> <Esc>
+" inoremap <buffer> <Right> <Esc>
+" inoremap <buffer> <Up> <Esc>
+" inoremap <buffer> <Down> <Esc>
+" inoremap <buffer> <PageUp> <Esc>
+" inoremap <buffer> <PageDown> <Esc>
+" 
+" vnoremap <buffer> <Left> <Esc>
+" vnoremap <buffer> <Right> <Esc>
+" vnoremap <buffer> <Up> <Esc>
+" vnoremap <buffer> <Down> <Esc>
+" vnoremap <buffer> <PageUp> <Esc>
+" vnoremap <buffer> <PageDown> <Esc>
 
 " inoremap <leader><leader> <Esc>
 " vnoremap <leader><leader> <Esc>
@@ -78,15 +82,28 @@ vnoremap <buffer> <PageDown> <Esc>
 " nnoremap <leader>py :-1read $HOME/.vim/snippets/.skeleton.py<CR>
 " nnoremap <leader>c :-1read $HOME/.vim/snippets/.skeleton.c<CR>
 
-" Read: https://www.amd.com/content/dam/amd/en/documents/txt/aocc-4.0.0-readme.txt
+" Read: https://www.amd.com/content/dam/amd/en/documents/txt/aocc-4.1.0-readme.txt
 " You can find more about these global variables in clan-format.py
-let g:clang_format_path="/opt/AMD/aocc-compiler-4.0.0/bin/clang-format"
-let g:clang_format_fallback_style="LLVM"
+let g:clang_format_path="/opt/AMD/aocc-compiler-4.1.0/bin/clang-format"
+let g:clang_format_fallback_style="GNU"
 
 " Read: https://black.readthedocs.io/en/stable/integrations/editors.html#vim-8-native-plugin-management
 " Read: https://clang.llvm.org/docs/ClangFormat.html#vim-integration
 augroup format
     autocmd!
     autocmd BufWritePre *.py execute ":Black"
-    autocmd BufWritePre *.c,*.cc,*.cpp,*.h,*.java,*.js,*.json execute ":py3file /opt/AMD/aocc-compiler-4.0.0/share/clang/clang-format.py"
+    autocmd BufWritePre *.c,*.cc,*.cpp,*.cxx,*.h,*.java,*.js,*.json execute ":py3file /opt/AMD/aocc-compiler-4.1.0/share/clang/clang-format.py"
 augroup END
+
+if has('python')
+    map <C-I> :pyf /opt/AMD/aocc-compiler-4.1.0/share/clang/clang-format.py<cr>
+    imap <C-I> <c-o>:pyf /opt/AMD/aocc-compiler-4.1.0/share/clang/clang-format.py<cr>
+elseif has('python3')
+    map <C-I> :py3f /opt/AMD/aocc-compiler-4.1.0/share/clang/clang-format.py<cr>
+    imap <C-I> <c-o>:py3f /opt/AMD/aocc-compiler-4.1.0/share/clang/clang-format.py<cr>
+endif
+
+" augroup ProjectDrawer
+"   autocmd!
+"   autocmd VimEnter * :Vexplore
+" augroup END
