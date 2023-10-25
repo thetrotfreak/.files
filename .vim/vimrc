@@ -18,7 +18,7 @@ if &term =~ 'xterm' || &term == 'win32'
 endif
 " To explicitly use dark variant of gruvbox, uncomment the next 2 lines
 set background=dark
-colorscheme nord
+colorscheme catppuccin_mocha
 
 set hidden
 set noswapfile
@@ -42,15 +42,15 @@ set cursorline
 
 " netrw tweaks
 let g:netrw_banner=0
-let g:netrw_browse_split=4
+let g:netrw_browse_split=3
 " let g:netrw_browse_split=4
 let g:netrw_altv=1
-let g:netrw_liststyle=3
+let g:netrw_liststyle=4
 " let g:netrw_winsize=25
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\*'
-" Refer: https://stackoverflow.com/questions/8730702/how-do-i-configure-vimrc-so-that-line-numbers-display-in-netrw-in-vim
-let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
+
+
 
 " Vim hard mode; disable arrow keys and backspace key; makes your life harder
 " set backspace=0
@@ -108,5 +108,6 @@ endif
 "   autocmd VimEnter * :Vexplore
 " augroup END
 
-" Refer: https://vi.stackexchange.com/questions/14519/how-to-run-internal-vim-terminal-at-current-files-dir
+" Refer: https://stackoverflow.com/questions/8730702/how-do-i-configure-vimrc-so-that-line-numbers-display-in-netrw-in-vim
+let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 autocmd BufEnter * silent! lcd %:p:h
