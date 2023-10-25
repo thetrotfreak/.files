@@ -23,9 +23,13 @@ dash -c "$(curl -fsSLo ~/.tmux.conf https://raw.githubusercontent.com/thetrotfre
 dash -c "$(curl --create-dirs -fsSLo ~/.vim/pack/python/start/black/plugin/black.vim https://raw.githubusercontent.com/psf/black/stable/plugin/black.vim)"
 dash -c "$(curl --create-dirs -fsSLo ~/.vim/pack/python/start/black/autoload/black.vim https://raw.githubusercontent.com/psf/black/stable/autoload/black.vim)"
 dash -c "$(curl --create-dirs -fsSLo ~/.vim/colors/gruvbox.vim https://raw.githubusercontent.com/thetrotfreak/.files/main/.vim/colors/gruvbox.vim)"
-dash -c "$(curl --create-dirs -fsSLo ~/.vim/colors/catppuccin_mocha.vim https://raw.githubusercontent.com/thetrotfreak/.files/main/.vim/colors/catppuccin_mocha.vim)"
-dash -c "$(curl --create-dirs -fsSLo ~/.vim/colors/catppuccin_macchiato.vim https://raw.githubusercontent.com/thetrotfreak/.files/main/.vim/colors/catppuccin_macchiato.vim)"
-dash -c "$(curl --create-dirs -fsSLo ~/.vim/colors/catppuccin_latte.vim https://raw.githubusercontent.com/thetrotfreak/.files/main/.vim/colors/catppuccin_latte.vim)"
+dash -c "$(curl --create-dirs -fsSLo ~/.vim/colors/catppuccin_frappe.vim https://raw.githubusercontent.com/thetrotfreak/.files/main/.vim/colors/gruvbox-high-contrast.vim)"
 dash -c "$(curl --create-dirs -fsSLo ~/.vim/colors/catppuccin_frappe.vim https://raw.githubusercontent.com/thetrotfreak/.files/main/.vim/colors/catppuccin_frappe.vim)"
+dash -c "$(curl --create-dirs -fsSLo ~/.vim/colors/catppuccin_latte.vim https://raw.githubusercontent.com/thetrotfreak/.files/main/.vim/colors/catppuccin_latte.vim)"
+dash -c "$(curl --create-dirs -fsSLo ~/.vim/colors/catppuccin_macchiato.vim https://raw.githubusercontent.com/thetrotfreak/.files/main/.vim/colors/catppuccin_macchiato.vim)"
+dash -c "$(curl --create-dirs -fsSLo ~/.vim/colors/catppuccin_mocha.vim https://raw.githubusercontent.com/thetrotfreak/.files/main/.vim/colors/catppuccin_mocha.vim)"
+dash -c "$(curl --create-dirs -fsSLo ~/.vim/colors/catppuccin_frappe.vim https://raw.githubusercontent.com/thetrotfreak/.files/main/.vim/colors/mac_classic.vim)"
+dash -c "$(curl --create-dirs -fsSLo ~/.vim/colors/catppuccin_frappe.vim https://raw.githubusercontent.com/thetrotfreak/.files/main/.vim/colors/nord.vim)"
 dash -c "$(curl --create-dirs -fsSLo ~/.vim/vimrc https://raw.githubusercontent.com/thetrotfreak/.files/main/.vim/vimrc)"
+
 vim --not-a-term -c Black -c qall
