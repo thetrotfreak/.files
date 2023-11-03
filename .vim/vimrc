@@ -49,38 +49,42 @@ let g:netrw_liststyle=4
 " let g:netrw_winsize=25
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\*'
-
-
+" Refer: https://stackoverflow.com/questions/8730702/how-do-i-configure-vimrc-so-that-line-numbers-display-in-netrw-in-vim
+let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
+autocmd BufEnter * silent! lcd %:p:h
 
 " Vim hard mode; disable arrow keys and backspace key; makes your life harder
 " set backspace=0
 
-" nnoremap <buffer> <Left> <Esc>
-" nnoremap <buffer> <Right> <Esc>
-" nnoremap <buffer> <Up> <Esc>
-" nnoremap <buffer> <Down> <Esc>
-" nnoremap <buffer> <PageUp> <Esc>
-" nnoremap <buffer> <PageDown> <Esc>
-" 
-" inoremap <buffer> <Left> <Esc>
-" inoremap <buffer> <Right> <Esc>
-" inoremap <buffer> <Up> <Esc>
-" inoremap <buffer> <Down> <Esc>
-" inoremap <buffer> <PageUp> <Esc>
-" inoremap <buffer> <PageDown> <Esc>
-" 
-" vnoremap <buffer> <Left> <Esc>
-" vnoremap <buffer> <Right> <Esc>
-" vnoremap <buffer> <Up> <Esc>
-" vnoremap <buffer> <Down> <Esc>
-" vnoremap <buffer> <PageUp> <Esc>
-" vnoremap <buffer> <PageDown> <Esc>
+nnoremap <buffer> <Left> <Esc>
+nnoremap <buffer> <Right> <Esc>
+nnoremap <buffer> <Up> <Esc>
+nnoremap <buffer> <Down> <Esc>
+nnoremap <buffer> <PageUp> <Esc>
+nnoremap <buffer> <PageDown> <Esc>
 
-" inoremap <leader><leader> <Esc>
-" vnoremap <leader><leader> <Esc>
+inoremap <buffer> <Left> <Esc>
+inoremap <buffer> <Right> <Esc>
+inoremap <buffer> <Up> <Esc>
+inoremap <buffer> <Down> <Esc>
+inoremap <buffer> <PageUp> <Esc>
+inoremap <buffer> <PageDown> <Esc>
+
+vnoremap <buffer> <Left> <Esc>
+vnoremap <buffer> <Right> <Esc>
+vnoremap <buffer> <Up> <Esc>
+vnoremap <buffer> <Down> <Esc>
+vnoremap <buffer> <PageUp> <Esc>
+vnoremap <buffer> <PageDown> <Esc>
+
+let g:mapleader = ","
+inoremap <leader><leader> <Esc>
+vnoremap <leader><leader> <Esc>
+nnoremap <leader><leader> <Esc>
 
 " nnoremap <leader>py :-1read $HOME/.vim/snippets/.skeleton.py<CR>
 " nnoremap <leader>c :-1read $HOME/.vim/snippets/.skeleton.c<CR>
+" nnoremap <leader>java :-1read $HOME/.vim/snippets/.skeleton.java<CR>
 
 " Read: https://www.amd.com/content/dam/amd/en/documents/txt/aocc-4.1.0-readme.txt
 " You can find more about these global variables in clan-format.py
@@ -108,6 +112,49 @@ endif
 "   autocmd VimEnter * :Vexplore
 " augroup END
 
-" Refer: https://stackoverflow.com/questions/8730702/how-do-i-configure-vimrc-so-that-line-numbers-display-in-netrw-in-vim
-let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
-autocmd BufEnter * silent! lcd %:p:h
+" Read: https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Read: https://github.com/junegunn/vim-plug#example
+call plug#begin()
+" The default plugin directory will be as follows:
+"   - Vim (Linux/macOS): '~/.vim/plugged'
+" You can specify a custom plugin directory by passing it as the argument
+"   - e.g. `call plug#begin('~/.vim/plugged')`
+"   - Avoid using standard Vim directory names like 'plugin'
+
+" Make sure you use single quotes
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+
+call plug#end()
+
+nnoremap <C-p> :FZF<CR>
+set hlsearch
+nnoremap <silent> <leader><space> :nohlsearch<CR>
+
+" Customize fzf colors to match your color scheme
+" - fzf#wrap translates this to a set of `--color` options
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" Enable per-command history
+" - History files will be stored in the specified directory
+" - When set, CTRL-N and CTRL-P will be bound to 'next-history' and
+"   'previous-history' instead of 'down' and 'up'.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
