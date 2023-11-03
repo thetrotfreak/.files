@@ -18,6 +18,11 @@ echo "export PATH=$HOME/.local/bin:\$PATH" >> ~/.zshrc
 # export it to the current ENVIRONMENT to successfully allow Black Vim Integration
 export PATH=$HOME/.local/bin:$PATH
 
+# https://github.com/sharkdp/fd
+# install only after $HOME/./local/bin has been added to $PATH
+sudo apt-get install fd-find
+ln -s /usr/bin/fdfind /home/bivas/.local/bin/fd
+
 dash -c "$(curl -fsSLo ~/.tmux.conf https://raw.githubusercontent.com/thetrotfreak/.files/main/.tmux.conf)"
 
 dash -c "$(curl --create-dirs -fsSLo ~/.vim/pack/python/start/black/plugin/black.vim https://raw.githubusercontent.com/psf/black/stable/plugin/black.vim)"
