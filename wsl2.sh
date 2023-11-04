@@ -20,7 +20,7 @@ export PATH=$HOME/.local/bin:$PATH
 
 # https://github.com/sharkdp/fd
 # install only after $HOME/./local/bin has been added to $PATH
-sudo apt-get install fd-find
+sudo apt-get install fd-find tree bat
 ln -s /usr/bin/fdfind /home/bivas/.local/bin/fd
 
 dash -c "$(curl -fsSLo ~/.tmux.conf https://raw.githubusercontent.com/thetrotfreak/.files/main/.tmux.conf)"
