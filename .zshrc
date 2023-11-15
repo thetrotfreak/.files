@@ -105,13 +105,13 @@ alias ohmyzsh="vim ~/.oh-my-zsh"
 alias so="source $HOME/.zshrc"
 alias clip="clip.exe"
 export PATH=/home/bivas/.local/bin:$PATH
-source /opt/AMD/aocc-compiler-4.1.0/setenv_AOCC.sh
 export PATH=/mnt/c/Program\ Files/Google/Chrome/Application:$PATH
 export BROWSER=chrome.exe
 export CRYPTOGRAPHY_OPENSSL_NO_LEGACY=0
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 export NT_HOME="/mnt/c/Users/bivas"
+source /opt/AMD/aocc-compiler-4.1.0/setenv_AOCC.sh
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -147,18 +147,13 @@ export NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/extra/root.cert.crt
 alias rstudio="chrome.exe --profile-directory=\"Profile 5\" http://localhost:8787"
 alias wtconfig="vim /mnt/c/Users/bivas/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
 
-setopt  rcquotes
+setopt rcquotes
 
 # Use ~~ as the trigger sequence instead of the default **
 # export FZF_COMPLETION_TRIGGER='~~'
 
 # Options to fzf command
 # export FZF_COMPLETION_OPTS='--border --info=inline-right'
-
-# Read: https://github.com/junegunn/fzf/wiki/Color-schemes
- export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-  --color fg:#ebdbb2,bg:#282828,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f
-  --color info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598,marker:#fe8019,header:#665c54'
 
 # Use fd (https://github.com/sharkdp/fd) instead of the default find
 # command for listing path candidates.
@@ -181,41 +176,106 @@ _fzf_comprun() {
   shift
 
   case "$command" in
-    cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
-    export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
-    ssh)          fzf --preview 'dig {}'                   "$@" ;;
-    *)            fzf --preview 'batcat -n --color=always {}' "$@" ;;
+    cd)           fzf --preview 'tree -C {} | head -200'      "$@" ;;
+    export|unset) fzf --preview "eval 'echo \$'{}"            "$@" ;;
+    ssh)          fzf --preview 'dig {}'                      "$@" ;;
+    *)            fd -t f | fzf --preview 'batcat -n --color=always {}' "$@" ;;
   esac
 }
 
 # Print tree structure in the preview window
-export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
+export FZF_ALT_C_OPTS="
+  --preview 'tree -C {}'"
 
 export FZF_CTRL_R_OPTS="
   --preview 'echo {}' --preview-window up:3:hidden:wrap
   --bind 'ctrl-/:toggle-preview'
   --bind 'ctrl-y:execute-silent(echo -n {2..} | clip.exe)+abort'
-  --bind 'ctrl-e:become(vim --ttyfail -p {+} < /dev/tty > /dev/tty)'
+  --bind 'ctrl-e:become(vim --ttyfail -- {+} < /dev/tty > /dev/tty)'
   --color header:italic
   --header 'Press CTRL-Y to copy command into clipboard'"
 
 
-export FZF_DEFAULT_OPTS="
-  --cycle
-  --multi
-  --extended
-  --no-mouse
-  --no-scrollbar
-  --layout=reverse
-  --border=rounded
-  --info=inline-right
-  --marker='+'
-  --tabstop=4
-  --height 40%
-  --bind 'ctrl-e:become(vim --ttyfail -p {+} < /dev/tty > /dev/tty)'"
+#export FZF_DEFAULT_OPTS="
+#  --cycle
+#  --multi
+#  --extended
+#  --no-mouse
+#  --no-scrollbar
+#  --layout=reverse
+#  --border=rounded
+#  --info=inline-right
+#  --marker='+'
+#  --tabstop=4
+#  --height 40%
+#  --bind 'ctrl-e:become(vim --ttyfail -- {+} < /dev/tty > /dev/tty)'"
 
-export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+export FZF_ALT_C_COMMAND='fd --type d --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+alias t='tree --prune'
+
+_gen_fzf_default_opts() {
+  #local base03="234"
+  #local base02="235"
+  #local base01="240"
+  #local base00="241"
+  #local base0="244"
+  #local base1="245"
+  #local base2="254"
+  #local base3="230"
+  #local yellow="136"
+  #local orange="166"
+  #local red="160"
+  #local magenta="125"
+  #local violet="61"
+  #local blue="33"
+  #local cyan="37"
+  #local green="64"
+  # Uncomment for truecolor, if your terminal supports it.
+  local base03="#002b36"
+  local base02="#073642"
+  local base01="#586e75"
+  local base00="#657b83"
+  local base0="#839496"
+  local base1="#93a1a1"
+  local base2="#eee8d5"
+  local base3="#fdf6e3"
+  local yellow="#b58900"
+  local orange="#cb4b16"
+  local red="#dc322f"
+  local magenta="#d33682"
+  local violet="#6c71c4"
+  local blue="#268bd2"
+  local cyan="#2aa198"
+  local green="#859900"
+
+  # Comment and uncomment below for the light theme.
+
+  # Solarized Dark color scheme for fzf
+  export FZF_DEFAULT_OPTS="
+    --cycle
+    --multi
+    --extended
+    --no-mouse
+    --no-scrollbar
+    --layout=reverse
+    --border=rounded
+    --info=inline-right
+    --marker='+'
+    --tabstop=4
+    --height 40%
+    --bind 'ctrl-e:become(vim --ttyfail -- {+} < /dev/tty > /dev/tty)'
+    --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
+    --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
+  "
+  ## Solarized Light color scheme for fzf
+  #export FZF_DEFAULT_OPTS="
+  #  --color fg:-1,bg:-1,hl:$blue,fg+:$base02,bg+:$base2,hl+:$blue
+  #  --color info:$yellow,prompt:$yellow,pointer:$base03,marker:$base03,spinner:$yellow
+  #"
+}
+_gen_fzf_default_opts
