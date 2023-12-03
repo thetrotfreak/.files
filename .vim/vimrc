@@ -22,7 +22,6 @@ endif
 
 " To explicitly use dark variant of gruvbox, uncomment the next 2 lines
 set background=dark
-" colorscheme solarized
 
 set hidden
 set noswapfile
@@ -30,9 +29,9 @@ set noswapfile
 set expandtab
 set autoindent
 set smartindent
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
 
 " enable syntax and plugins (for netrw)
 syntax enable
@@ -90,9 +89,9 @@ vnoremap <buffer> <PageDown> <Esc>
 " let g:mapleader = ","
 " let g:mapleader = "\<C-Space>"
 
-" inoremap <leader><leader> <Esc>
-" vnoremap <leader><leader> <Esc>
-" nnoremap <leader><leader> <Esc>
+inoremap <leader><leader> <Esc>
+vnoremap <leader><leader> <Esc>
+nnoremap <leader><leader> <Esc>
 
 " nnoremap <leader>py :-1read $HOME/.vim/snippets/.skeleton.py<CR>
 " nnoremap <leader>c :-1read $HOME/.vim/snippets/.skeleton.c<CR>
@@ -140,12 +139,13 @@ call plug#begin()
 "   - Avoid using standard Vim directory names like 'plugin'
 
 " Make sure you use single quotes
-" Plug 'altercation/vim-colors-solarized'
+" Plug 'dense-analysis/ale'
 " Plug 'tpope/vim-fugitive'
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
-Plug 'ericbn/vim-solarized'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'morhetz/gruvbox'
 Plug 'psf/black', { 'branch': 'stable' }
+Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -178,8 +178,11 @@ let g:fzf_colors =
 "   'previous-history' instead of 'down' and 'up'.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
-let g:airline_theme='solarized'
-" let g:airline_theme = 'catppuccin_mocha'
+let g:airline#extensions#ale#enabled = 1 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-colorscheme solarized
+let g:airline_theme = 'gruvbox'
+colorscheme gruvbox
+let g:airline_powerline_fonts = 0
+
+set smartcase
