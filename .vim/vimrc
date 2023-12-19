@@ -20,12 +20,12 @@ if &term =~ 'xterm' || &term == 'win32'
     let &t_te ..= "\e[0 q"    " default (depends on terminal, normally blink block)
 endif
 
-" To explicitly use dark variant of gruvbox, uncomment the next 2 lines
+" To explicitly use dark variant of catppuccin_frappe, uncomment the next 2 lines
 set background=dark
 
 set hidden
 set noswapfile
-" set backspace=indent,eol,start
+set backspace=indent,eol,start
 set expandtab
 set autoindent
 set smartindent
@@ -62,7 +62,7 @@ let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 autocmd BufEnter * silent! lcd %:p:h
 
 " Vim hard mode; disable arrow keys and backspace key; makes your life harder
-set backspace=0
+" set backspace=0
 
 nnoremap <buffer> <Left> <Esc>
 nnoremap <buffer> <Right> <Esc>
@@ -143,11 +143,11 @@ call plug#begin()
 " Plug 'tpope/vim-fugitive'
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'morhetz/gruvbox'
 Plug 'psf/black', { 'branch': 'stable' }
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'preservim/nerdtree'
 
 call plug#end()
 
@@ -181,8 +181,11 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:airline#extensions#ale#enabled = 1 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline_theme = 'gruvbox'
-colorscheme gruvbox
+let g:airline_theme = 'catppuccin_frappe'
+colorscheme catppuccin_frappe
 let g:airline_powerline_fonts = 0
 
 set smartcase
+
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <leader>n :NERDTreeFocus<CR>
