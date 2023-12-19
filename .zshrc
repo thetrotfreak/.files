@@ -230,8 +230,11 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS"
   --marker='+'
   --tabstop=4
   --height 40%
-  --bind 'ctrl-e:become(vim --ttyfail -- {+} < /dev/tty > /dev/tty)'
-  --color fg:#ebdbb2,bg:#282828,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f
-  --color info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598,marker:#fe8019,header:#665c54"
-
+  --bind 'ctrl-e:become(vim --ttyfail -- {+} < /dev/tty > /dev/tty)'"
+  
+# Read: https://github.com/catppuccin/fzf?tab=readme-ov-file#usage 
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS"
+  --color=bg+:#414559,bg:#303446,spinner:#f2d5cf,hl:#e78284 \
+  --color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
+  --color=marker:#f2d5cf,fg+:#c6d0f5,prompt:#ca9ee6,hl+:#e78284"
 export PATH="/opt/apache-maven-3.9.5/bin:$PATH"
