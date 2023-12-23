@@ -110,12 +110,34 @@ augroup format
     autocmd BufWritePre *.c,*.cc,*.cpp,*.cxx,*.h,*.java,*.js,*.json execute ":py3file /opt/AMD/aocc-compiler-4.1.0/share/clang/clang-format.py"
 augroup END
 
-if has('python')
-    map <C-I> :pyf /opt/AMD/aocc-compiler-4.1.0/share/clang/clang-format.py<cr>
-    imap <C-I> <c-o>:pyf /opt/AMD/aocc-compiler-4.1.0/share/clang/clang-format.py<cr>
-elseif has('python3')
-    map <C-I> :py3f /opt/AMD/aocc-compiler-4.1.0/share/clang/clang-format.py<cr>
-    imap <C-I> <c-o>:py3f /opt/AMD/aocc-compiler-4.1.0/share/clang/clang-format.py<cr>
+" if has('python')
+"     map <C-I> :pyf /opt/AMD/aocc-compiler-4.1.0/share/clang/clang-format.py<cr>
+"     imap <C-I> <c-o>:pyf /opt/AMD/aocc-compiler-4.1.0/share/clang/clang-format.py<cr>
+" elseif has('python3')
+"     map <C-I> :py3f /opt/AMD/aocc-compiler-4.1.0/share/clang/clang-format.py<cr>
+"     imap <C-I> <c-o>:py3f /opt/AMD/aocc-compiler-4.1.0/share/clang/clang-format.py<cr>
+" endif
+
+function FormatFile()
+  let clangformatfiletypes = ['c', 'cpp', 'java', 'javascript', 'json']
+  let view = winsaveview()
+
+  if &filetype ==# 'python'
+    execute ":Black"
+  else
+    for ft in clangformatfiletypes
+      if &filetype ==# ft
+        py3f /opt/AMD/aocc-compiler-4.1.0/share/clang/clang-format.py
+      endif
+    endfor
+  endif
+
+  call winrestview(view)
+endfunction
+
+if has('python3')
+    map <C-I> :call FormatFile()<cr>
+    imap <C-I> <c-o>:call FormatFile()<cr>
 endif
 
 " augroup ProjectDrawer
