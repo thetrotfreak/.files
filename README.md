@@ -6,7 +6,7 @@ curl https://raw.githubusercontent.com/thetrotfreak/.files/main/wsl2.sh | dash
 ### Windows Terminal Profile:
 
 ```console
-wsl.exe --shell-type login --cd ~ --distribution Ubuntu tmux
+wsl.exe --shell-type login --cd ~ --distribution Ubuntu tmux attach-session -t base || tmux new -s base
 ```
 ### References:
 |What?|Where?|Note!|
