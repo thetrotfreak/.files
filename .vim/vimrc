@@ -165,6 +165,7 @@ call plug#begin()
 " Plug 'tpope/vim-fugitive'
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim',
 Plug 'psf/black', { 'branch': 'stable' }
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
@@ -173,7 +174,10 @@ Plug 'preservim/nerdtree'
 
 call plug#end()
 
-nnoremap <C-p> :FZF<CR>
+nnoremap <C-p>f :Files<CR>
+nnoremap <C-p>b :Buffers<CR>
+nnoremap <C-p>g :GFiles?<CR>
+nnoremap <C-p>l :BLines<CR>
 set hlsearch
 nnoremap <silent> <leader><space> :nohlsearch<CR>
 
@@ -204,10 +208,11 @@ let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_theme = 'catppuccin_frappe'
-colorscheme catppuccin_frappe
 let g:airline_powerline_fonts = 0
-
-set smartcase
 
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <leader>n :NERDTreeFocus<CR>
+
+colorscheme catppuccin_frappe
+set smartcase
+set cscoperelative
