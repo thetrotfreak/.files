@@ -104,13 +104,14 @@ alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 alias so="source $HOME/.zshrc"
 alias clip="clip.exe"
-export PATH=/home/bivas/.local/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 export PATH=/mnt/c/Program\ Files/Google/Chrome/Application:$PATH
-export BROWSER=chrome.exe
+export PATH="/mnt/c/Program Files (x86)/Microsoft/Edge/Application":$PATH
+# export BROWSER=chrome.exe
+export BROWSER=msedge.exe
 export CRYPTOGRAPHY_OPENSSL_NO_LEGACY=0
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
-export NT_HOME="/mnt/c/Users/bivas"
 source /opt/AMD/aocc-compiler-4.1.0/setenv_AOCC.sh
 
 # >>> conda initialize >>>
@@ -143,9 +144,6 @@ zstyle ":conda_zsh_completion:*" use-groups true
 zstyle ":conda_zsh_completion:*" show-unnamed true
 
 export NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/extra/root.cert.crt
-
-alias rstudio="chrome.exe --profile-directory=\"Profile 5\" http://localhost:8787"
-alias wtconfig="vim /mnt/c/Users/bivas/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
 
 setopt rcquotes
 
@@ -195,21 +193,6 @@ export FZF_CTRL_R_OPTS="
   --color header:italic
   --header 'Press CTRL-Y to copy command into clipboard'"
 
-
-#export FZF_DEFAULT_OPTS="
-#  --cycle
-#  --multi
-#  --extended
-#  --no-mouse
-#  --no-scrollbar
-#  --layout=reverse
-#  --border=rounded
-#  --info=inline-right
-#  --marker='+'
-#  --tabstop=4
-#  --height 40%
-#  --bind 'ctrl-e:become(vim --ttyfail -- {+} < /dev/tty > /dev/tty)'"
-
 export FZF_ALT_C_COMMAND='fd --type d --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
@@ -232,9 +215,20 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS"
   --height 40%
   --bind 'ctrl-e:become(vim --ttyfail -- {+} < /dev/tty > /dev/tty)'"
   
+export PATH="/opt/apache-maven-3.9.5/bin:$PATH"
+
 # Read: https://github.com/catppuccin/fzf?tab=readme-ov-file#usage 
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS"
+export CATPPUCCIN_MACCHIATO="\
+  --color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
+  --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+  --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
+export CATPPUCCIN_FRAPPE=" \
   --color=bg+:#414559,bg:#303446,spinner:#f2d5cf,hl:#e78284 \
   --color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
   --color=marker:#f2d5cf,fg+:#c6d0f5,prompt:#ca9ee6,hl+:#e78284"
-export PATH="/opt/apache-maven-3.9.5/bin:$PATH"
+export CATPPUCCIN_MOCHA="\
+  --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+  --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+  --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS$CATPPUCCIN_MACCHIATO
