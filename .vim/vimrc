@@ -7,6 +7,10 @@ set ttyfast
 set nocompatible
 set termguicolors
 
+set hlsearch
+set smartcase
+set cscoperelative
+
 " Read: https://vim.fandom.com/wiki/Avoid_the_escape_key#Use_Alt/Meta_In_a_Terminal
 " Read: https://vimhelp.org/term.txt.html#terminal-options
 " Read(slow &t_EI): https://stackoverflow.com/a/58042714
@@ -19,9 +23,6 @@ if &term =~ 'xterm' || &term == 'win32'
     let &t_ti ..= "\e[1 q"    " blink block
     let &t_te ..= "\e[0 q"    " default (depends on terminal, normally blink block)
 endif
-
-" To explicitly use dark variant of catppuccin_frappe, uncomment the next 2 lines
-set background=dark
 
 set hidden
 set noswapfile
@@ -164,13 +165,14 @@ call plug#begin()
 " Plug 'dense-analysis/ale'
 " Plug 'tpope/vim-fugitive'
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+Plug 'edkolev/tmuxline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim',
+Plug 'preservim/nerdtree'
 Plug 'psf/black', { 'branch': 'stable' }
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'preservim/nerdtree'
 
 call plug#end()
 
@@ -178,7 +180,6 @@ nnoremap <C-p>f :Files<CR>
 nnoremap <C-p>b :Buffers<CR>
 nnoremap <C-p>g :GFiles?<CR>
 nnoremap <C-p>l :BLines<CR>
-set hlsearch
 nnoremap <silent> <leader><space> :nohlsearch<CR>
 
 " Customize fzf colors to match your color scheme
@@ -204,15 +205,27 @@ let g:fzf_colors =
 "   'previous-history' instead of 'down' and 'up'.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
+let g:airline#extensions#tmuxline#enabled = 1
 let g:airline#extensions#ale#enabled = 1 
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline_theme = 'catppuccin_frappe'
 let g:airline_powerline_fonts = 0
+let g:tmuxline_powerline_separators = 0
+let g:airline_theme = 'catppuccin_frappe'
 
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <leader>n :NERDTreeFocus<CR>
 
 colorscheme catppuccin_frappe
-set smartcase
-set cscoperelative
+
+let g:tmuxline_preset = {
+        \ 'a': '#S',
+        \ 'b': '#F',
+        \ 'c': '#W',
+        \ 'win': ['#I', '#W'],
+        \ 'cwin': ['#I', '#W'],
+        \ 'x': '%a',
+        \ 'y': ['%b %d', '%R'],
+        \ 'z': ''}
+
