@@ -214,8 +214,8 @@ let g:airline_powerline_fonts = 0
 let g:tmuxline_powerline_separators = 0
 let g:airline_theme = 'catppuccin_frappe'
 
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <silent> <C-t> :NERDTreeToggle<CR>
+nnoremap <silent> <leader>n :NERDTreeFocus<CR>
 
 colorscheme catppuccin_frappe
 
