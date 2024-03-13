@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -14,7 +14,7 @@ ZSH_THEME="robbyrussell"
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "kolo" )
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -29,10 +29,10 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-zstyle ':omz:update' frequency 7
+zstyle ':omz:update' frequency 13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-DISABLE_MAGIC_FUNCTIONS="true"
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -47,7 +47,7 @@ DISABLE_MAGIC_FUNCTIONS="true"
 # You can also set it to another string to have that shown instead of the default red dots.
 # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-COMPLETION_WAITING_DOTS="true"
+# COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -60,7 +60,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-HIST_STAMPS="mm/dd/yyyy"
+# HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -70,29 +70,30 @@ HIST_STAMPS="mm/dd/yyyy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ssh-agent web-search conda-zsh-completion tmux)
+plugins=(git ssh-agent tmux)
 zstyle :omz:plugins:ssh-agent quiet yes
 zstyle :omz:plugins:ssh-agent identities github gitlab bitbucket
 zstyle :omz:plugins:ssh-agent lifetime
 export ZSH_TMUX_AUTOSTART=true
+export ZSH_TMUX_AUTOSTART=false
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export MANPATH="/usr/local/man:$MANPATH"
+# export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+   export EDITOR='vim'
 else
-  export EDITOR='vim'
+   export EDITOR='vim'
 fi
 
 # Compilation flags
-export ARCHFLAGS="-arch x86_64"
+# export ARCHFLAGS="-arch x86_64"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -100,52 +101,11 @@ export ARCHFLAGS="-arch x86_64"
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshconfig="vim ~/.zshrc"
-alias ohmyzsh="vim ~/.oh-my-zsh"
-alias so="source $HOME/.zshrc"
-alias clip="clip.exe"
+alias zshconfig="$EDITOR ~/.zshrc"
+alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
 export PATH=$HOME/.local/bin:$PATH
-export PATH=/mnt/c/Program\ Files/Google/Chrome/Application:$PATH
 export PATH="/mnt/c/Program Files (x86)/Microsoft/Edge/Application":$PATH
-# export BROWSER=chrome.exe
 export BROWSER=msedge.exe
-export CRYPTOGRAPHY_OPENSSL_NO_LEGACY=0
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-source /opt/AMD/aocc-compiler-4.1.0/setenv_AOCC.sh
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/bivas/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/bivas/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/bivas/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/bivas/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-# To activate the completion cache for packages, add the following to your
-# '.zshrc':
-#
-zstyle ':completion::complete:*' use-cache 1
-#
-# To display subcommand completion in groups, please add the following to your
-# '.zshrc':
-#
-zstyle ":conda_zsh_completion:*" use-groups true
-#
-# To display unnamed environments and prefixes of environments, add the following
-# to your '.zshrc':
-#
-zstyle ":conda_zsh_completion:*" show-unnamed true
-
-export NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/extra/root.cert.crt
-
-setopt rcquotes
 
 # Use ~~ as the trigger sequence instead of the default **
 # export FZF_COMPLETION_TRIGGER='~~'
@@ -199,8 +159,6 @@ export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --e
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-alias t='tree --prune'
-
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS"
   --cycle
   --multi
@@ -214,8 +172,6 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS"
   --tabstop=4
   --height 40%
   --bind 'ctrl-e:become(vim --ttyfail -- {+} < /dev/tty > /dev/tty)'"
-  
-export PATH="/opt/apache-maven-3.9.5/bin:$PATH"
 
 # Read: https://github.com/catppuccin/fzf?tab=readme-ov-file#usage 
 export CATPPUCCIN_MACCHIATO="\
@@ -231,4 +187,13 @@ export CATPPUCCIN_MOCHA="\
   --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
   --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS$CATPPUCCIN_FRAPPE
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS$CATPPUCCIN_MOCHA
+
+autoload -U compinit
+compinit -i
+
+source /opt/AMD/aocc-compiler-4.1.0/setenv_AOCC.sh
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+alias lt="tree --prune"
