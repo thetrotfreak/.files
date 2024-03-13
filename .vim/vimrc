@@ -6,6 +6,7 @@ set ttimeoutlen=1
 set ttyfast
 set nocompatible
 set termguicolors
+set autoread
 
 set hlsearch
 set smartcase
@@ -166,6 +167,7 @@ call plug#begin()
 " Plug 'tpope/vim-fugitive'
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'edkolev/tmuxline.vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim',
 Plug 'preservim/nerdtree'
@@ -205,19 +207,15 @@ let g:fzf_colors =
 "   'previous-history' instead of 'down' and 'up'.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
-let g:airline#extensions#tmuxline#enabled = 1
+let g:airline#extensions#tmuxline#enabled = 0
 let g:airline#extensions#ale#enabled = 1 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_powerline_fonts = 0
 let g:tmuxline_powerline_separators = 0
-let g:airline_theme = 'catppuccin_frappe'
-
-nnoremap <silent> <C-t> :NERDTreeToggle<CR>
-nnoremap <silent> <leader>n :NERDTreeFocus<CR>
-
-colorscheme catppuccin_frappe
+let g:airline_theme = 'catppuccin_mocha'
+let g:airline_section_z = '%l/%L, %v'
 
 let g:tmuxline_preset = {
         \ 'a': '#S',
@@ -229,3 +227,7 @@ let g:tmuxline_preset = {
         \ 'y': '%a, %b %d',
         \ 'z': '%R'}
 
+nnoremap <silent> <C-t> :NERDTreeToggle<CR>
+nnoremap <silent> <leader>n :NERDTreeFocus<CR>
+
+colorscheme catppuccin_mocha
