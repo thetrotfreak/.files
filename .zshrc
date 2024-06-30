@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="bivas" # set by `omz`
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -29,7 +29,7 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-zstyle ':omz:update' frequency 13
+zstyle ':omz:update' frequency 1
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -70,12 +70,14 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ssh-agent tmux)
+# plugins=(git ssh-agent tmux)
+plugins=(git ssh-agent)
 zstyle :omz:plugins:ssh-agent quiet yes
-zstyle :omz:plugins:ssh-agent identities github gitlab bitbucket
+zstyle :omz:plugins:ssh-agent identities github gitlab bitbucket hfco github_cloudurity
 zstyle :omz:plugins:ssh-agent lifetime
-export ZSH_TMUX_AUTOSTART=true
-export ZSH_TMUX_AUTOSTART=false
+# export ZSH_TMUX_AUTOSTART=false
+# export ZSH_TMUX_AUTOCONNECT=false
+# export ZSH_TMUX_CONFIG=$HOME/.tmux.conf
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -101,6 +103,7 @@ fi
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
+alias vim="vim"
 alias zshconfig="$EDITOR ~/.zshrc"
 alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
 export PATH=$HOME/.local/bin:$PATH
@@ -186,8 +189,14 @@ export CATPPUCCIN_MOCHA="\
   --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
   --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
   --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+export HARMONIC_DARK="\
+  --color=fg:#cbd6e2,bg:#0b1c2c,hl:#56bf8b \
+  --color=fg+:#56bf8b,bg+:#223b54,hl+:#56bf8b \
+  --color=info:#8bbf56,prompt:#bf568b,pointer:#bf8b56 \
+  --color=marker:#568BBF,spinner:#8bbf56,header:#627e99"
 
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS$CATPPUCCIN_MOCHA
+# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS$HARMONIC_DARK
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS
 
 autoload -U compinit
 compinit -i
@@ -197,3 +206,17 @@ export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 alias lt="tree --prune"
+export TESSDATA_PREFIX=/usr/share/tesseract-ocr/4.00/tessdata
+
+# fnm
+export PATH="/home/bivas/.local/share/fnm:$PATH"
+eval "`fnm env`"
+alias x="tmux -L tmux_sock_null -f /dev/null"
+
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        source "$BASE16_SHELL/profile_helper.sh"
+
+base16_monokai
