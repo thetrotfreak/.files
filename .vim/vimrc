@@ -48,7 +48,7 @@ set wildmenu
 
 set number
 set relativenumber
-set cursorline
+" set cursorline
 
 " netrw tweaks
 let g:netrw_banner=0
@@ -164,17 +164,26 @@ call plug#begin()
 
 " Make sure you use single quotes
 " Plug 'dense-analysis/ale'
+" Plug 'dracula/vim', { 'name': 'dracula' }
+" Plug 'edkolev/tmuxline.vim'
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Plug 'tpope/vim-fugitive'
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
-Plug 'edkolev/tmuxline.vim'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'chriskempson/base16-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim',
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 Plug 'psf/black', { 'branch': 'stable' }
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+" post install (yarn install | npm install) then load plugin only for editing supported files
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install --frozen-lockfile --production',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
 
 call plug#end()
 
@@ -207,6 +216,12 @@ let g:fzf_colors =
 "   'previous-history' instead of 'down' and 'up'.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
+if exists('$BASE16_THEME')
+      \ && (!exists('g:colors_name') || g:colors_name != 'base16-$BASE16_THEME')
+    let base16colorspace=256
+    colorscheme base16-$BASE16_THEME
+endif
+
 let g:airline#extensions#tmuxline#enabled = 0
 let g:airline#extensions#ale#enabled = 1 
 let g:airline#extensions#tabline#enabled = 1
@@ -214,7 +229,7 @@ let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_powerline_fonts = 0
 let g:tmuxline_powerline_separators = 0
-let g:airline_theme = 'catppuccin_mocha'
+let g:airline_theme = 'base16_gruvbox_dark_pale'
 let g:airline_section_z = '%l/%L, %v'
 
 let g:tmuxline_preset = {
@@ -227,7 +242,27 @@ let g:tmuxline_preset = {
         \ 'y': '%a, %b %d',
         \ 'z': '%R'}
 
-nnoremap <silent> <C-t> :NERDTreeToggle<CR>
+nnoremap <silent> <leader>t :NERDTreeToggle<CR>
 nnoremap <silent> <leader>n :NERDTreeFocus<CR>
 
-colorscheme catppuccin_mocha
+" augroup zen_mode
+"     autocmd!
+"     autocmd User GoyoEnter Limelight
+"     autocmd User GoyoLeave Limelight!
+" augroup END
+
+function! ToggleZenMode()
+    if exists(':Goyo')
+        Goyo
+    endif
+endfunction
+
+function! ToggleFocusMode()
+    if exists(':Limelight')
+        Limelight!!
+    endif
+endfunction
+
+nnoremap <silent> <Leader>z :call ToggleZenMode()<CR>
+nnoremap <silent> <Leader>f :call ToggleFocusMode()<CR>
+
