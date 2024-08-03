@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="bivas" # set by `omz`
+ZSH_THEME="robbyrussel" # set by `omz`
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -71,9 +71,9 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git ssh-agent tmux)
-plugins=(git ssh-agent)
+plugins=(git ssh-agent gpg-agent)
 zstyle :omz:plugins:ssh-agent quiet yes
-zstyle :omz:plugins:ssh-agent identities github gitlab bitbucket hfco github_cloudurity
+zstyle :omz:plugins:ssh-agent identities id_rsa
 zstyle :omz:plugins:ssh-agent lifetime
 # export ZSH_TMUX_AUTOSTART=false
 # export ZSH_TMUX_AUTOCONNECT=false
@@ -146,15 +146,32 @@ _fzf_comprun() {
 
 # Print tree structure in the preview window
 export FZF_ALT_C_OPTS="
-  --preview 'tree -C {}'"
-
-export FZF_CTRL_R_OPTS="
-  --preview 'echo {}' --preview-window up:3:hidden:wrap
+  --preview 'tree -C {}' --preview-window hidden:wrap
   --bind 'ctrl-/:toggle-preview'
+  --bind 'ctrl-e:become(vim --ttyfail -- {+} < /dev/tty > /dev/tty)'"
+
+# export FZF_CTRL_R_OPTS="
+#   --preview 'echo {}' --preview-window up:3:hidden:wrap
+#   --bind 'ctrl-/:toggle-preview'
+#   --bind 'ctrl-y:execute-silent(echo -n {2..} | clip.exe)+abort'
+#   --bind 'ctrl-e:become(vim --ttyfail -- {+} < /dev/tty > /dev/tty)'
+#   --color header:italic
+#   --header 'Press CTRL-Y to copy command into clipboard'"
+export FZF_CTRL_R_OPTS="
+  --preview 'echo {}' --preview-window hidden:wrap
+  --bind 'ctrl-/:toggle-preview'
+  --bind 'ctrl-e:execute(echo -n {2..} | vim --ttyfail - )+abort'
   --bind 'ctrl-y:execute-silent(echo -n {2..} | clip.exe)+abort'
+  --color header:italic
+  --header 'Ctrl-Y copies command to clipboard'"
+
+export FZF_CTRL_T_OPTS="
+  --preview 'batcat -n --color=always {}' --preview-window hidden:wrap
+  --bind 'ctrl-/:toggle-preview'
+  --bind 'ctrl-y:execute-silent(cat {+} | clip.exe)+abort'
   --bind 'ctrl-e:become(vim --ttyfail -- {+} < /dev/tty > /dev/tty)'
   --color header:italic
-  --header 'Press CTRL-Y to copy command into clipboard'"
+  --header 'Ctrl-Y concatenates file to clipboard'"
 
 export FZF_ALT_C_COMMAND='fd --type d --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
@@ -173,43 +190,42 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS"
   --info=inline-right
   --marker='+'
   --tabstop=4
-  --height 40%
-  --bind 'ctrl-e:become(vim --ttyfail -- {+} < /dev/tty > /dev/tty)'"
+  --height 40%"
+# --bind 'ctrl-e:become(vim --ttyfail -- {+} < /dev/tty > /dev/tty)'"
 
 # Read: https://github.com/catppuccin/fzf?tab=readme-ov-file#usage 
-export CATPPUCCIN_MACCHIATO="\
-  --color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
-  --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
-  --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
-export CATPPUCCIN_FRAPPE=" \
-  --color=bg+:#414559,bg:#303446,spinner:#f2d5cf,hl:#e78284 \
-  --color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
-  --color=marker:#f2d5cf,fg+:#c6d0f5,prompt:#ca9ee6,hl+:#e78284"
-export CATPPUCCIN_MOCHA="\
-  --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
-  --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
-  --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
-export HARMONIC_DARK="\
-  --color=fg:#cbd6e2,bg:#0b1c2c,hl:#56bf8b \
-  --color=fg+:#56bf8b,bg+:#223b54,hl+:#56bf8b \
-  --color=info:#8bbf56,prompt:#bf568b,pointer:#bf8b56 \
-  --color=marker:#568BBF,spinner:#8bbf56,header:#627e99"
-
+# export CATPPUCCIN_MACCHIATO="\
+#   --color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
+#   --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+#   --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
+# export CATPPUCCIN_FRAPPE=" \
+#   --color=bg+:#414559,bg:#303446,spinner:#f2d5cf,hl:#e78284 \
+#   --color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
+#   --color=marker:#f2d5cf,fg+:#c6d0f5,prompt:#ca9ee6,hl+:#e78284"
+# export CATPPUCCIN_MOCHA="\
+#   --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+#   --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+#   --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+# export HARMONIC_DARK="\
+#   --color=fg:#cbd6e2,bg:#0b1c2c,hl:#56bf8b \
+#   --color=fg+:#56bf8b,bg+:#223b54,hl+:#56bf8b \
+#   --color=info:#8bbf56,prompt:#bf568b,pointer:#bf8b56 \
+#   --color=marker:#568BBF,spinner:#8bbf56,header:#627e99"
+# 
 # export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS$HARMONIC_DARK
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS
 
 autoload -U compinit
 compinit -i
 
-source /opt/AMD/aocc-compiler-4.1.0/setenv_AOCC.sh
+source /opt/AMD/aocc-compiler-4.2.0/setenv_AOCC.sh
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 alias lt="tree --prune"
-export TESSDATA_PREFIX=/usr/share/tesseract-ocr/4.00/tessdata
 
 # fnm
-export PATH="/home/bivas/.local/share/fnm:$PATH"
+export PATH="/home/$USER/.local/share/fnm:$PATH"
 eval "`fnm env`"
 alias x="tmux -L tmux_sock_null -f /dev/null"
 
@@ -219,4 +235,5 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
         source "$BASE16_SHELL/profile_helper.sh"
 
-base16_monokai
+export NODE_EXTRA_CA_CERTS="/usr/local/share/ca-certificates/SSL_CA_Central.pem.crt"
+base16_dracula
