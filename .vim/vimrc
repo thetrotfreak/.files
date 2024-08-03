@@ -1,16 +1,14 @@
 " Watch: youtube.com/watch?v=XA2WjJbmmoM
+set autoread
+set cscoperelative
+set hlsearch
+set nocompatible
+set smartcase
+set termguicolors
 set timeout
 set timeoutlen=750
-set ttimeout
 set ttimeoutlen=1
 set ttyfast
-set nocompatible
-set termguicolors
-set autoread
-
-set hlsearch
-set smartcase
-set cscoperelative
 
 " Read: https://vim.fandom.com/wiki/Avoid_the_escape_key#Use_Alt/Meta_In_a_Terminal
 " Read: https://vimhelp.org/term.txt.html#terminal-options
@@ -25,13 +23,13 @@ if &term =~ 'xterm' || &term == 'win32'
     let &t_te ..= "\e[0 q"    " default (depends on terminal, normally blink block)
 endif
 
-set hidden
-set noswapfile
+set autoindent
 set backspace=indent,eol,start
 set expandtab
-set autoindent
-set smartindent
+set hidden
+set noswapfile
 set shiftwidth=2
+set smartindent
 set softtabstop=2
 set tabstop=2
 
@@ -87,21 +85,13 @@ vnoremap <buffer> <Down> <Esc>
 vnoremap <buffer> <PageUp> <Esc>
 vnoremap <buffer> <PageDown> <Esc>
 
-" let g:mapleader = "\<Space>"
-" let g:mapleader = ","
-" let g:mapleader = "\<C-Space>"
-
 inoremap <leader><leader> <Esc>
 vnoremap <leader><leader> <Esc>
 nnoremap <leader><leader> <Esc>
 
-" nnoremap <leader>py :-1read $HOME/.vim/snippets/.skeleton.py<CR>
-" nnoremap <leader>c :-1read $HOME/.vim/snippets/.skeleton.c<CR>
-" nnoremap <leader>java :-1read $HOME/.vim/snippets/.skeleton.java<CR>
-
 " Read: https://www.amd.com/content/dam/amd/en/documents/txt/aocc-4.1.0-readme.txt
 " You can find more about these global variables in clan-format.py
-let g:clang_format_path="/opt/AMD/aocc-compiler-4.1.0/bin/clang-format"
+let g:clang_format_path="/opt/AMD/aocc-compiler-4.2.0/bin/clang-format"
 let g:clang_format_fallback_style="GNU"
 
 " Read: https://black.readthedocs.io/en/stable/integrations/editors.html#vim-8-native-plugin-management
@@ -109,16 +99,8 @@ let g:clang_format_fallback_style="GNU"
 augroup format
     autocmd!
     autocmd BufWritePre *.py execute ":Black"
-    autocmd BufWritePre *.c,*.cc,*.cpp,*.cxx,*.h,*.java,*.js,*.json execute ":py3file /opt/AMD/aocc-compiler-4.1.0/share/clang/clang-format.py"
+    autocmd BufWritePre *.c,*.cc,*.cpp,*.cxx,*.h,*.java,*.js,*.json execute ":py3file /opt/AMD/aocc-compiler-4.2.0/share/clang/clang-format.py"
 augroup END
-
-" if has('python')
-"     map <C-I> :pyf /opt/AMD/aocc-compiler-4.1.0/share/clang/clang-format.py<cr>
-"     imap <C-I> <c-o>:pyf /opt/AMD/aocc-compiler-4.1.0/share/clang/clang-format.py<cr>
-" elseif has('python3')
-"     map <C-I> :py3f /opt/AMD/aocc-compiler-4.1.0/share/clang/clang-format.py<cr>
-"     imap <C-I> <c-o>:py3f /opt/AMD/aocc-compiler-4.1.0/share/clang/clang-format.py<cr>
-" endif
 
 function FormatFile()
   let clangformatfiletypes = ['c', 'cpp', 'java', 'javascript', 'json']
@@ -129,7 +111,7 @@ function FormatFile()
   else
     for ft in clangformatfiletypes
       if &filetype ==# ft
-        py3f /opt/AMD/aocc-compiler-4.1.0/share/clang/clang-format.py
+        py3f /opt/AMD/aocc-compiler-4.2.0/share/clang/clang-format.py
       endif
     endfor
   endif
@@ -138,8 +120,8 @@ function FormatFile()
 endfunction
 
 if has('python3')
-    map <C-I> :call FormatFile()<cr>
-    imap <C-I> <c-o>:call FormatFile()<cr>
+    nnoremap <C-I> :call FormatFile()<cr>
+    "imap <C-I> <c-o>:call FormatFile()<cr>
 endif
 
 " augroup ProjectDrawer
@@ -164,12 +146,12 @@ call plug#begin()
 
 " Make sure you use single quotes
 " Plug 'dense-analysis/ale'
+" Plug 'tpope/vim-fugitive'
+" Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+Plug 'chriskempson/base16-vim'
 " Plug 'dracula/vim', { 'name': 'dracula' }
 " Plug 'edkolev/tmuxline.vim'
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-" Plug 'tpope/vim-fugitive'
-Plug 'catppuccin/vim', { 'as': 'catppuccin' }
-Plug 'chriskempson/base16-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim',
 Plug 'junegunn/goyo.vim'
@@ -180,6 +162,7 @@ Plug 'psf/black', { 'branch': 'stable' }
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'c3lang/editor-plugins', {'rtp':'vim'}
 " post install (yarn install | npm install) then load plugin only for editing supported files
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install --frozen-lockfile --production',
@@ -192,6 +175,7 @@ nnoremap <C-p>b :Buffers<CR>
 nnoremap <C-p>g :GFiles?<CR>
 nnoremap <C-p>l :BLines<CR>
 nnoremap <silent> <leader><space> :nohlsearch<CR>
+nnoremap <leader>th :Colors<CR>
 
 " Customize fzf colors to match your color scheme
 " - fzf#wrap translates this to a set of `--color` options
@@ -222,6 +206,7 @@ if exists('$BASE16_THEME')
     colorscheme base16-$BASE16_THEME
 endif
 
+" colorscheme base16-gruvbox-dark-pale
 let g:airline#extensions#tmuxline#enabled = 0
 let g:airline#extensions#ale#enabled = 1 
 let g:airline#extensions#tabline#enabled = 1
@@ -229,7 +214,7 @@ let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_powerline_fonts = 0
 let g:tmuxline_powerline_separators = 0
-let g:airline_theme = 'base16_gruvbox_dark_pale'
+" let g:airline_theme = 'base16_gruvbox_dark_pale'
 let g:airline_section_z = '%l/%L, %v'
 
 let g:tmuxline_preset = {
@@ -266,3 +251,22 @@ endfunction
 nnoremap <silent> <Leader>z :call ToggleZenMode()<CR>
 nnoremap <silent> <Leader>f :call ToggleFocusMode()<CR>
 
+function! s:fzf_neighbouring_files()
+  let current_file =expand("%")
+  let cwd = fnamemodify(current_file, ':p:h')
+  let command = 'ag -g "" -f ' . cwd . ' --depth 0'
+
+  call fzf#run({
+        \ 'source': command,
+        \ 'sink':   'e',
+        \ 'options': '-m -x +s',
+        \ 'window':  'enew' })
+endfunction
+
+command! FZFNeigh call s:fzf_neighbouring_files()
+
+command! -nargs=1 -bang Locate call fzf#run(fzf#wrap(
+      \ {'source': 'locate <q-args>', 'options': '-m'}, <bang>0))
+
+nnoremap <silent> <Leader>p :FZFNeigh<CR>
+nnoremap <silent> <Leader>c :%w !clip.exe<CR>:echo "buffer copied to clipboard"<CR>
