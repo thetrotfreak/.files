@@ -170,12 +170,13 @@ Plug 'prettier/vim-prettier', {
 
 call plug#end()
 
-nnoremap <C-p>f :Files<CR>
-nnoremap <C-p>b :Buffers<CR>
-nnoremap <C-p>g :GFiles?<CR>
-nnoremap <C-p>l :BLines<CR>
+nnoremap <C-p>t :Buffers<CR>
+nnoremap <C-p>. :Files<CR>
+nnoremap <C-p>v :GFiles?<CR>
+nnoremap <C-p>/ :BLines<CR>
+nnoremap <C-p>% :Lines<CR>
+nnoremap <C-k><C-t> :Colors<CR>
 nnoremap <silent> <leader><space> :nohlsearch<CR>
-nnoremap <leader>th :Colors<CR>
 
 " Customize fzf colors to match your color scheme
 " - fzf#wrap translates this to a set of `--color` options
@@ -248,19 +249,25 @@ function! ToggleFocusMode()
     endif
 endfunction
 
-nnoremap <silent> <Leader>z :call ToggleZenMode()<CR>
-nnoremap <silent> <Leader>f :call ToggleFocusMode()<CR>
+nnoremap <silent> <C-k>z :call ToggleZenMode()<CR>
+nnoremap <silent> <C-k>zz :call ToggleFocusMode()<CR>
 
 function! s:fzf_neighbouring_files()
   let current_file =expand("%")
   let cwd = fnamemodify(current_file, ':p:h')
   let command = 'ag -g "" -f ' . cwd . ' --depth 0'
 
+  " call fzf#run({
+  "       \ 'source': command,
+  "       \ 'sink':   'e',
+  "       \ 'options': '-m -x +s',
+  "       \ 'window':  'enew' })
+  " https://github.com/junegunn/fzf/blob/master/README-VIM.md#fzfrun
   call fzf#run({
         \ 'source': command,
         \ 'sink':   'e',
         \ 'options': '-m -x +s',
-        \ 'window':  'enew' })
+        \ 'window':  {'width':0.9, 'height':0.6} })
 endfunction
 
 command! FZFNeigh call s:fzf_neighbouring_files()
@@ -268,5 +275,9 @@ command! FZFNeigh call s:fzf_neighbouring_files()
 command! -nargs=1 -bang Locate call fzf#run(fzf#wrap(
       \ {'source': 'locate <q-args>', 'options': '-m'}, <bang>0))
 
-nnoremap <silent> <Leader>p :FZFNeigh<CR>
-nnoremap <silent> <Leader>c :%w !clip.exe<CR>:echo "buffer copied to clipboard"<CR>
+nnoremap <silent> <C-p>.. :FZFNeigh<CR>
+nnoremap <silent> <leader>y :%w !clip.exe<CR>:echo "Yanked buffer to clipboard"<CR>
+
+" https://github.com/junegunn/fzf.vim?tab=readme-ov-file#hide-statusline
+autocmd! FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
