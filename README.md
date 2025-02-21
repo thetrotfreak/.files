@@ -14,7 +14,7 @@ wsl.exe --shell-type login --cd ~ --distribution Ubuntu tmux attach-session -t b
 |Oh My Zsh!|https://github.com/ohmyzsh/ohmyzsh/wiki#welcome-to-oh-my-zsh|
 |**uv** - An extremely fast Python package and project manager, written in Rust.|https://docs.astral.sh/uv/getting-started/installation/|
 |**pip** - The Python Package Installer|https://pip.pypa.io/en/stable/installation/#get-pip-py|
-|**AOCC** - AMD Optimizing C/C++ and Fortran Compilers|https://www.amd.com/en/developer/aocc.html|`curl` [*this*](https://download.amd.com/developer/eula/aocc/aocc-4-2/aocc-compiler-4.2.0_1_amd64.deb)) directly to avoid the **EULA**|
+|**AOCC** - AMD Optimizing C/C++ and Fortran Compilers|https://www.amd.com/en/developer/aocc.html|`curl` or `wget` [*this*](https://download.amd.com/developer/eula/aocc/aocc-5-0/aocc-compiler-5.0.0_1_amd64.deb)) directly to avoid the **EULA**|
 |**Black** - The Uncompromising Code Formatter|https://black.readthedocs.io/en/stable/integrations/editors.html#vim-8-native-plugin-management|
 |**Autopep8** - The Compromising Code Formatter|https://github.com/tell-k/vim-autopep8|
 |ClangFormat|https://clang.llvm.org/docs/ClangFormat.html#vim-integration|
