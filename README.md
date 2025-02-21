@@ -15,6 +15,7 @@ wsl.exe --shell-type login --cd ~ --distribution Ubuntu tmux attach-session -t b
 |**pip** - The Python Package Installer|https://pip.pypa.io/en/stable/installation/#get-pip-py|
 |**AOCC** - AMD Optimizing C/C++ and Fortran Compilers|https://www.amd.com/en/developer/aocc.html|`curl` [*this*](https://download.amd.com/developer/eula/aocc/aocc-4-2/aocc-compiler-4.2.0_1_amd64.deb)) directly to avoid the **EULA**|
 |**Black** - The Uncompromising Code Formatter|https://black.readthedocs.io/en/stable/integrations/editors.html#vim-8-native-plugin-management|
+|**Autopep8** - The Compromising Code Formatter|https://github.com/tell-k/vim-autopep8|
 |ClangFormat|https://clang.llvm.org/docs/ClangFormat.html#vim-integration|
 |Vim Meetups|https://youtu.be/XA2WjJbmmoM?t=315|
 |MySQL|https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04#step-2-configuring-mysql|
