@@ -25,6 +25,6 @@ wsl.exe --shell-type login --cd ~ --distribution Ubuntu tmux attach-session -t b
 |**Volta** - The Hassle-Free JavaScript Tool Manager|https://docs.volta.sh/guide/getting-started|
 |GitHub CLI|https://github.com/cli/cli/blob/trunk/docs/install_linux.md#debian-ubuntu-linux-raspberry-pi-os-apt|Read [*this*](https://cli.github.com/manual/gh_completion)
 |GitLab CLI|https://gitlab.com/gitlab-org/cli/-/releases|Read [*this*](https://github.com/thetrotfreak/.files/blob/main/glab.md)
-|`fzf`|https://github.com/junegunn/fzf#using-git|
-|`fd`|https://github.com/sharkdp/fd#on-ubuntu|
-|`cscope`|https://cscope.sourceforge.net/|Read [*tutorial*](https://cscope.sourceforge.net/cscope_vim_tutorial.html)
+|**fzf**|https://github.com/junegunn/fzf#using-git|
+|**fd**|https://github.com/sharkdp/fd#on-ubuntu|
+|**cscope**|https://cscope.sourceforge.net/|Read [*tutorial*](https://cscope.sourceforge.net/cscope_vim_tutorial.html)
