@@ -1,14 +1,14 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
+# Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
+# load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussel" # set by `omz`
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -21,7 +21,7 @@ ZSH_THEME="robbyrussel" # set by `omz`
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
-HYPHEN_INSENSITIVE="true"
+# HYPHEN_INSENSITIVE="true"
 
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
@@ -29,7 +29,7 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-zstyle ':omz:update' frequency 1
+zstyle ':omz:update' frequency 13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -70,14 +70,11 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# plugins=(git ssh-agent tmux)
 plugins=(git ssh-agent gpg-agent)
 zstyle :omz:plugins:ssh-agent quiet yes
-zstyle :omz:plugins:ssh-agent identities id_rsa
 zstyle :omz:plugins:ssh-agent lifetime
-# export ZSH_TMUX_AUTOSTART=false
-# export ZSH_TMUX_AUTOCONNECT=false
-# export ZSH_TMUX_CONFIG=$HOME/.tmux.conf
+zstyle :omz:plugins:ssh-agent identities
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -89,26 +86,26 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
+  export EDITOR='vim'
 else
-   export EDITOR='vim'
+  export EDITOR='vi'
 fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# export ARCHFLAGS="-arch $(uname -m)"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# Set personal aliases, overriding those provided by Oh My Zsh libs,
+# plugins, and themes. Aliases can be placed here, though Oh My Zsh
+# users are encouraged to define aliases within a top-level file in
+# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
+# - $ZSH_CUSTOM/aliases.zsh
+# - $ZSH_CUSTOM/macos.zsh
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-alias vim="vim"
-alias zshconfig="$EDITOR ~/.zshrc"
-alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
-export PATH=$HOME/.local/bin:$PATH
-export PATH="/mnt/c/Program Files (x86)/Microsoft/Edge/Application":$PATH
-export BROWSER=msedge.exe
+
+. "$HOME/.local/bin/env"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 
 # Use ~~ as the trigger sequence instead of the default **
 # export FZF_COMPLETION_TRIGGER='~~'
@@ -140,7 +137,7 @@ _fzf_comprun() {
     cd)           fzf --preview 'tree -C {} | head -200'      "$@" ;;
     export|unset) fzf --preview "eval 'echo \$'{}"            "$@" ;;
     ssh)          fzf --preview 'dig {}'                      "$@" ;;
-    *)            fd -t f | fzf --preview 'batcat -n --color=always {}' "$@" ;;
+    *)            fd --t f | fzf --preview 'batcat -n --color=always {}' "$@" ;;
   esac
 }
 
@@ -148,30 +145,23 @@ _fzf_comprun() {
 export FZF_ALT_C_OPTS="
   --preview 'tree -C {}' --preview-window hidden:wrap
   --bind 'ctrl-/:toggle-preview'
-  --bind 'ctrl-e:become(vim --ttyfail -- {+} < /dev/tty > /dev/tty)'"
+  --bind 'ctrl-e:become(vim --ttyfail -- {+} < /dev/tty > /dev/tty)'
+  --header 'C-/ :Preview, C-E :Edit'"
 
-# export FZF_CTRL_R_OPTS="
-#   --preview 'echo {}' --preview-window up:3:hidden:wrap
-#   --bind 'ctrl-/:toggle-preview'
-#   --bind 'ctrl-y:execute-silent(echo -n {2..} | clip.exe)+abort'
-#   --bind 'ctrl-e:become(vim --ttyfail -- {+} < /dev/tty > /dev/tty)'
-#   --color header:italic
-#   --header 'Press CTRL-Y to copy command into clipboard'"
 export FZF_CTRL_R_OPTS="
   --preview 'echo {}' --preview-window hidden:wrap
   --bind 'ctrl-/:toggle-preview'
   --bind 'ctrl-e:execute(echo -n {2..} | vim --ttyfail - )+abort'
   --bind 'ctrl-y:execute-silent(echo -n {2..} | clip.exe)+abort'
-  --color header:italic
-  --header 'Ctrl-Y copies command to clipboard'"
+  --header 'Ctrl-Y :Clip, Ctrl-E :Edit'"
 
 export FZF_CTRL_T_OPTS="
   --preview 'batcat -n --color=always {}' --preview-window hidden:wrap
   --bind 'ctrl-/:toggle-preview'
   --bind 'ctrl-y:execute-silent(cat {+} | clip.exe)+abort'
   --bind 'ctrl-e:become(vim --ttyfail -- {+} < /dev/tty > /dev/tty)'
-  --color header:italic
-  --header 'Ctrl-Y concatenates file to clipboard'"
+  --bind 'ctrl-o:become(view --ttyfail -- {+} < /dev/tty > /dev/tty)'
+  --header 'C-Y :Clip, C-E :Edit, C-O :Read'"
 
 export FZF_ALT_C_COMMAND='fd --type d --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
@@ -190,50 +180,20 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS"
   --info=inline-right
   --marker='+'
   --tabstop=4
-  --height 40%"
+  --height 50%"
 # --bind 'ctrl-e:become(vim --ttyfail -- {+} < /dev/tty > /dev/tty)'"
 
-# Read: https://github.com/catppuccin/fzf?tab=readme-ov-file#usage 
-# export CATPPUCCIN_MACCHIATO="\
-#   --color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
-#   --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
-#   --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
-# export CATPPUCCIN_FRAPPE=" \
-#   --color=bg+:#414559,bg:#303446,spinner:#f2d5cf,hl:#e78284 \
-#   --color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
-#   --color=marker:#f2d5cf,fg+:#c6d0f5,prompt:#ca9ee6,hl+:#e78284"
-# export CATPPUCCIN_MOCHA="\
-#   --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
-#   --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
-#   --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
-# export HARMONIC_DARK="\
-#   --color=fg:#cbd6e2,bg:#0b1c2c,hl:#56bf8b \
-#   --color=fg+:#56bf8b,bg+:#223b54,hl+:#56bf8b \
-#   --color=info:#8bbf56,prompt:#bf568b,pointer:#bf8b56 \
-#   --color=marker:#568BBF,spinner:#8bbf56,header:#627e99"
-# 
-# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS$HARMONIC_DARK
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS
 
-autoload -U compinit
-compinit -i
+# Tinted Scripts
+# Place them after fzf to prevent from getting overriden 
+. ~/.config/tinted-fzf/sh/base16-gruvbox-dark-soft.sh
+. ~/.config/tinted-shell/scripts/base16-gruvbox-dark-soft.sh
 
-source /opt/AMD/aocc-compiler-4.2.0/setenv_AOCC.sh
-export PATH=$PATH:/usr/local/go/bin
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-alias lt="tree --prune"
+# Astral UV
+eval "$(uv generate-shell-completion zsh)"
+eval "$(uvx --generate-shell-completion zsh)"
 
-# fnm
-export PATH="/home/$USER/.local/share/fnm:$PATH"
-eval "`fnm env`"
-alias x="tmux -L tmux_sock_null -f /dev/null"
+# Have batcat auto adapt to shell colors
+export BAT_THEME='base16-256'
 
-# Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/"
-[ -n "$PS1" ] && \
-    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-        source "$BASE16_SHELL/profile_helper.sh"
-
-export NODE_EXTRA_CA_CERTS="/usr/local/share/ca-certificates/SSL_CA_Central.pem.crt"
-base16_dracula
