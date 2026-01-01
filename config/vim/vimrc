@@ -1,0 +1,247 @@
+" NOTE: youtube.com/NOTE?v=XA2WjJbmmoM
+set autoread
+set cscoperelative
+set hlsearch
+set incsearch
+set nocompatible
+set smartcase
+set termguicolors
+set timeout
+set timeoutlen=750
+set ttimeoutlen=1
+set ttyfast
+
+" NOTE: https://vim.fandom.com/wiki/Avoid_the_escape_key#Use_Alt/Meta_In_a_Terminal
+" NOTE: https://vimhelp.org/term.txt.html#terminal-options
+" NOTE: https://stackoverflow.com/a/58042714 (slow &t_EI)
+" Note: This should be set after `set termguicolors` or `set t_Co=256`.
+if &term =~ 'xterm' || &term == 'win32'
+    " NOTE: Use DECSCUSR escape sequences
+    let &t_SI = "\e[5 q"      " blink bar
+    let &t_SR = "\e[3 q"      " blink underline
+    let &t_EI = "\e[1 q"      " blink block
+    let &t_ti ..= "\e[1 q"    " blink block
+    let &t_te ..= "\e[0 q"    " default (depends on terminal, normally blink block)
+endif
+
+set autoindent
+set backspace=indent,eol,start
+set expandtab
+set hidden
+set noswapfile
+set shiftwidth=4
+set smartindent
+set softtabstop=4
+set tabstop=4
+
+" NOTE: enable syntax and plugins (for netrw)
+filetype plugin indent on
+syntax enable
+syntax on
+
+" NOTE: search down into the subfolders
+" NOTE: provides tab-compeltion for file operations
+set path+=**
+
+" NOTE: display all matching files when we tab-complete
+set wildmenu
+
+set cursorline
+set cursorlineopt=both
+set number
+set relativenumber
+
+" NOTE: netrw tweaks
+let g:netrw_banner=0
+let g:netrw_browse_split=3
+" let g:netrw_browse_split=4
+let g:netrw_altv=1
+let g:netrw_liststyle=4
+" let g:netrw_winsize=25
+" let g:netrw_list_hide=netrw_gitignore#Hide()
+" let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\*'
+" NOTE: https://stackoverflow.com/questions/8730702/how-do-i-configure-vimrc-so-that-line-numbers-display-in-netrw-in-vim
+let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
+autocmd BufEnter * silent! lcd %:p:h
+
+" NOTE: Vim hard mode; disable arrow keys and backspace key; makes your life harder
+set backspace=0
+
+nnoremap <buffer> <Down> <Esc>
+nnoremap <buffer> <Left> <Esc>
+nnoremap <buffer> <PageDown> <Esc>
+nnoremap <buffer> <PageUp> <Esc>
+nnoremap <buffer> <Right> <Esc>
+nnoremap <buffer> <Up> <Esc>
+
+inoremap <buffer> <Down> <Esc>
+inoremap <buffer> <Left> <Esc>
+inoremap <buffer> <PageDown> <Esc>
+inoremap <buffer> <PageUp> <Esc>
+inoremap <buffer> <Right> <Esc>
+inoremap <buffer> <Up> <Esc>
+
+vnoremap <buffer> <Down> <Esc>
+vnoremap <buffer> <Left> <Esc>
+vnoremap <buffer> <PageDown> <Esc>
+vnoremap <buffer> <PageUp> <Esc>
+vnoremap <buffer> <Right> <Esc>
+vnoremap <buffer> <Up> <Esc>
+
+inoremap <leader><leader> <Esc>
+nnoremap <leader><leader> <Esc>
+vnoremap <leader><leader> <Esc>
+
+" NOTE: https://www.amd.com/content/dam/amd/en/documents/developer/version-5-0-documents/aocc/aocc-5-0-readme.txt
+" NOTE: You can find more about these global variables in clan-format.py
+" let g:clang_format_path="/opt/AMD/aocc-compiler-5.0.0/bin/clang-format"
+" let g:clang_format_fallback_style="GNU"
+
+" NOTE: https://clang.llvm.org/docs/ClangFormat.html#vim-integration
+" augroup format
+"     autocmd!
+"     " autocmd BufWritePre *.py execute ":Autopep8"
+"     autocmd BufWritePre *.c,*.cc,*.cpp,*.cxx,*.h,*.java,*.js,*.json execute ":py3file /opt/AMD/aocc-compiler-5.0.0/share/clang/clang-format.py"
+" augroup END
+
+" function FormatFile()
+"     let clangformatfiletypes = ['c', 'cpp', 'java', 'javascript', 'json']
+"     let view = winsaveview()
+" 
+"     for ft in clangformatfiletypes
+"       if &filetype ==# ft
+"         py3f /opt/AMD/aocc-compiler-5.0.0/share/clang/clang-format.py
+"       endif
+"     endfor
+"     " if &filetype ==# 'python'
+"     "   execute ":Autopep8"
+"     " else
+"     "   for ft in clangformatfiletypes
+"     "     if &filetype ==# ft
+"     "       py3f /opt/AMD/aocc-compiler-5.0.0/share/clang/clang-format.py
+"     "     endif
+"     "   endfor
+"     " endif
+"     call winrestview(view)
+" endfunction
+
+" if has('python3')
+"     nnoremap <C-I> :call FormatFile()<cr>
+" endif
+
+" NOTE: https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.config/vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" NOTE:
+" https://github.com/junegunn/vim-plug#example
+" The default plugin directory will be as follows:
+"   - Vim (Linux/macOS): '~/.vim/plugged'
+" You can specify a custom plugin directory by passing it as the argument
+"   - e.g. `call plug#begin('~/.vim/plugged')`
+"   - Avoid using standard Vim directory names like 'plugin'
+call plug#begin()
+" Plug 'junegunn/goyo.vim'
+" Plug 'junegunn/limelight.vim'
+" Plug 'fisadev/vim-isort'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim',
+Plug 'preservim/nerdcommenter'
+Plug 'preservim/nerdtree'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+Plug 'sainnhe/sonokai'
+Plug 'arcticicestudio/nord-vim'
+" Plug 'vimwiki/vimwiki'
+" Plug 'psf/black', { 'branch': 'stable' }
+call plug#end()
+
+nnoremap <C-k><C-t> :Colors<CR>
+nnoremap <C-p>% :Lines<CR>
+nnoremap <C-p>/ :BLines<CR>
+nnoremap <C-p>v :GFiles?<CR>
+nnoremap <leader>. :Files<CR>
+nnoremap <leader>t :Buffers<CR>
+nnoremap <silent> <leader><space> :nohlsearch<CR>
+
+" NOTE:
+" Enable per-command history
+" - History files will be stored in the specified directory
+" - When set, CTRL-N and CTRL-P will be bound to 'next-history' and 'previous-history' instead of 'down' and 'up'.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+set rtp+=/opt/homebrew/opt/fzf
+
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tmuxline#enabled = 0
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline_extensions = ['searchcount', 'tabline', 'wordcount']
+let g:airline_highlighting_cache = 0
+let g:airline_powerline_fonts = 0
+let g:airline_section_z = '%l,%v %L'
+
+
+nnoremap <silent> <leader>] :NERDTreeToggle<CR>
+nnoremap <silent> <leader>[ :NERDTreeFocus<CR>
+nnoremap <silent> <F5> :NERDTreeRefreshRoot<CR>
+
+" nnoremap <silent> <leader>fzf :FZFNeigh<CR>
+nnoremap <silent> <leader>d :set spell<CR>
+nnoremap <silent> <leader>dd :set nospell<CR>
+nnoremap <silent> <leader>f :FZF<CR>
+" nnoremap <silent> <leader>rg :Rg<CR>
+nnoremap <silent> <leader>y :%w !pbcopy<CR>:echo "Yanked buffer to clipboard"<CR>
+vnoremap <silent> <leader>y :w !pbcopy<CR>:echo "Yanked selection to clipboard"<CR>
+nnoremap ; :
+vnoremap ; :
+
+" NOTE: https://github.com/junegunn/fzf.vim?tab=readme-ov-file#hide-statusline
+autocmd! FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+" colorscheme catppuccin_frappe
+" colorscheme catppuccin_macchiato
+" colorscheme catppuccin_mocha
+" colorscheme catppuccin_latte
+" colorscheme shine
+" let g:airline_theme='transparent'
+" colorscheme zaibatsu
+colorscheme nord
+let g:airline_theme='base16'
+" set background=dark
+" NOTE: Disable italics in Tinted Vim
+let g:tinted_italic = 0
+
+" NOTE: nerdtree
+let g:NERDTreeFileLines = 0
+" NOTE: If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+autocmd BufEnter * if winnr() == winnr('h') && bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+
+" let g:autopep8_disable_show_diff=1
+" let g:autopep8_max_line_length=120
+" let g:autopep8_on_save=0
+
+" Initialize configuration dictionary
+" before setting new options
+" README: https://github.com/junegunn/fzf.vim?tab=readme-ov-file#customization
+let g:fzf_vim = {}
+let g:fzf_layout = { 'window': { 'width': 0.6, 'height': 0.6 } }
+let g:fzf_vim.preview_window = []
+
+" let g:sonokai_better_performance=1
+" let g:sonokai_cursor='auto'
+" let g:sonokai_disable_italic_comment=1
+" let g:sonokai_enable_italic=0
+" let g:sonokai_style='shusia'
+" colorscheme sonokai
+" let g:airline_theme='sonokai'
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols_ascii = 1
